@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AURA Dental Studio | Advanced Aesthetic & Restorative Dentistry</title>
+    <meta name="description" content="Experience the future of dentistry. Advanced 3D diagnostics, painless laser therapy, bespoke smile design, and 24/7 AI-assisted patient care." />
+    <meta name="keywords" content="dental clinic, cosmetic dentistry, dental implants, invisalign, teeth whitening, emergency dentist, 3D dentistry, veneers" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AURA Dental Studio | Advanced Aesthetic & Restorative Care" />
+    <meta property="og:description" content="Precision dental medicine meets bespoke luxury care. Explore our 3D treatment explorer and book seamlessly online." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Medical / Dental Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230EA5E9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2C7.5 2 4 4.5 4 8c0 3 1.5 5 2.5 7.5S8 22 10 22s2-2.5 2-4.5c0 2 0 4.5 2 4.5s2.5-4 3.5-6.5S20 11 20 8c0-3.5-3.5-6-8-6z'/></svg>" />
+
+    <!-- Dental Clinic Structured Schema Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dentist",
+      "name": "AURA Dental Studio",
+      "image": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80",
+      "telephone": "+1 (310) 845-9200",
+      "email": "concierge@auradental.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "9465 Wilshire Blvd, Suite 400",
+        "addressLocality": "Beverly Hills",
+        "addressRegion": "CA",
+        "postalCode": "90212",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 34.0673,
+        "longitude": -118.4004
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "15:00"
+        }
+      ],
+      "priceRange": "$$$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "1284"
+      }
+    }
+    </script>
+  </head>
+  <body class="bg-alabaster text-luxury-slate font-sans antialiased selection:bg-brand-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
