@@ -69,7 +69,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#3ED9C0', '#F2E9DC', '#131F1C', '#0A110F'],
+        colors: ['#3E8E7E', '#5FA592', '#D4EFE8', '#FBFAF7'],
       });
     } catch {
       // ignore
@@ -99,21 +99,21 @@ END:VCALENDAR`;
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl bg-[#0E1614] text-[#F9FAF9] rounded-t-3xl sm:rounded-3xl shadow-2xl border border-white/15 overflow-hidden flex flex-col h-[94vh] sm:h-auto sm:max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 bg-black/40 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="w-full max-w-2xl bg-[#FBFAF7] text-[#1B2B27] rounded-t-3xl sm:rounded-3xl shadow-2xl border border-[#1B2B27]/10 overflow-hidden flex flex-col h-[94vh] sm:h-auto sm:max-h-[90vh]">
         {/* Modal Top Bar */}
-        <div className="p-4 sm:p-6 bg-[#0A110F] text-white flex items-center justify-between border-b border-white/10 shrink-0">
+        <div className="p-4 sm:p-6 bg-white text-[#1B2B27] flex items-center justify-between border-b border-[#1B2B27]/08 shrink-0">
           <div>
-            <span className="text-[11px] font-mono text-teal-400 font-medium tracking-wider block">
+            <span className="text-[11px] font-mono text-[#3E8E7E] font-semibold tracking-wider block">
               Instant Online Scheduling
             </span>
-            <h3 className="text-base sm:text-xl font-serif font-normal text-[#F2E9DC] mt-0.5 truncate max-w-[280px] sm:max-w-none">
+            <h3 className="text-base sm:text-xl font-serif font-normal text-[#1B2B27] mt-0.5 truncate max-w-[280px] sm:max-w-none">
               Book Your Visit at {clinic.name}
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-2 rounded-xl text-[#536963] hover:text-[#1B2B27] hover:bg-[#1B2B27]/05 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -121,7 +121,7 @@ END:VCALENDAR`;
 
         {/* Multi-Step Progress Tracker */}
         {step < 6 && (
-          <div className="px-4 sm:px-6 py-3 bg-[#0A110F]/60 border-b border-white/10 flex items-center justify-between text-xs shrink-0">
+          <div className="px-4 sm:px-6 py-3 bg-[#F5F1EA] border-b border-[#1B2B27]/08 flex items-center justify-between text-xs shrink-0">
             {[
               { num: 1, label: 'Patient' },
               { num: 2, label: 'Treatment' },
@@ -133,15 +133,15 @@ END:VCALENDAR`;
                 <div
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold ${
                     step === s.num
-                      ? 'bg-teal-400 text-teal-950 shadow-glow-teal'
+                      ? 'bg-[#3E8E7E] text-white shadow-sm'
                       : step > s.num
-                      ? 'bg-teal-500/20 text-teal-300 border border-teal-500/40'
-                      : 'bg-white/10 text-white/40'
+                      ? 'bg-[#3E8E7E]/15 text-[#3E8E7E] border border-[#3E8E7E]/30'
+                      : 'bg-[#1B2B27]/08 text-[#536963]'
                   }`}
                 >
                   {step > s.num ? <Check className="w-3.5 h-3.5" /> : s.num}
                 </div>
-                <span className={`hidden sm:inline font-medium ${step === s.num ? 'text-[#F2E9DC]' : 'text-white/40'}`}>
+                <span className={`hidden sm:inline font-semibold ${step === s.num ? 'text-[#1B2B27]' : 'text-[#536963]'}`}>
                   {s.label}
                 </span>
               </div>
@@ -154,10 +154,10 @@ END:VCALENDAR`;
           {/* STEP 1: Patient Type */}
           {step === 1 && (
             <div className="space-y-4">
-              <h4 className="text-lg font-serif font-normal text-[#F2E9DC]">
+              <h4 className="text-lg font-serif font-normal text-[#1B2B27]">
                 Step 1: Purpose of Your Visit
               </h4>
-              <p className="text-xs sm:text-sm text-[#A8B8B4]">
+              <p className="text-xs sm:text-sm text-[#536963]">
                 Please indicate your relationship with our studio so we allocate optimal consultation time.
               </p>
 
@@ -195,22 +195,22 @@ END:VCALENDAR`;
                     className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                       patientType === item.id
                         ? item.isUrgent
-                          ? 'border-rose-500/80 bg-rose-500/10 shadow-lg shadow-rose-950/40'
-                          : 'border-teal-400 bg-teal-500/10 shadow-glow-teal ring-1 ring-teal-400/30'
-                        : 'border-white/10 hover:border-white/20 bg-[#131F1C]'
+                          ? 'border-rose-500 bg-rose-50 shadow-sm'
+                          : 'border-[#3E8E7E] bg-[#3E8E7E]/08 shadow-sm ring-1 ring-[#3E8E7E]/30'
+                        : 'border-[#1B2B27]/08 hover:border-[#3E8E7E]/30 bg-white'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1.5">
-                      <h5 className={`font-medium text-sm ${item.isUrgent ? 'text-rose-300' : 'text-[#F2E9DC]'}`}>
+                      <h5 className={`font-semibold text-sm ${item.isUrgent ? 'text-rose-700' : 'text-[#1B2B27]'}`}>
                         {item.title}
                       </h5>
                       <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
-                        item.isUrgent ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' : 'bg-teal-500/15 text-teal-300 border border-teal-500/30'
+                        item.isUrgent ? 'bg-rose-100 text-rose-700 border border-rose-200' : 'bg-[#3E8E7E]/10 text-[#3E8E7E] border border-[#3E8E7E]/20'
                       }`}>
                         {item.badge}
                       </span>
                     </div>
-                    <p className="text-xs text-[#A8B8B4] leading-relaxed">{item.desc}</p>
+                    <p className="text-xs text-[#536963] leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -220,10 +220,10 @@ END:VCALENDAR`;
           {/* STEP 2: Treatment Selection */}
           {step === 2 && (
             <div className="space-y-4">
-              <h4 className="text-lg font-serif font-normal text-[#F2E9DC]">
+              <h4 className="text-lg font-serif font-normal text-[#1B2B27]">
                 Step 2: Select Treatment of Interest
               </h4>
-              <p className="text-xs sm:text-sm text-[#A8B8B4]">
+              <p className="text-xs sm:text-sm text-[#536963]">
                 Choose the primary clinical service you wish to receive or discuss.
               </p>
 
@@ -234,17 +234,17 @@ END:VCALENDAR`;
                     onClick={() => setSelectedTreatmentId(t.id)}
                     className={`p-3.5 rounded-2xl border cursor-pointer transition-all flex items-start gap-3 ${
                       selectedTreatmentId === t.id
-                        ? 'border-teal-400 bg-teal-500/10 shadow-glow-teal ring-1 ring-teal-400/30'
-                        : 'border-white/10 hover:border-white/20 bg-[#131F1C]'
+                        ? 'border-[#3E8E7E] bg-[#3E8E7E]/08 shadow-sm ring-1 ring-[#3E8E7E]/30'
+                        : 'border-[#1B2B27]/08 hover:border-[#3E8E7E]/30 bg-white'
                     }`}
                   >
-                    <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-white/10 bg-[#0A110F]">
-                      <img src={t.image} alt={t.title} className="w-full h-full object-cover opacity-80" />
+                    <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-[#1B2B27]/08 bg-[#FBFAF7]">
+                      <img src={t.image} alt={t.title} className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h5 className="font-medium text-xs sm:text-sm text-[#F2E9DC] truncate">{t.title}</h5>
-                      <span className="text-[11px] text-teal-400 block mt-0.5 font-medium">{t.duration}</span>
-                      <span className="text-[11px] text-[#A8B8B4]">{t.costRange}</span>
+                      <h5 className="font-semibold text-xs sm:text-sm text-[#1B2B27] truncate">{t.title}</h5>
+                      <span className="text-[11px] text-[#3E8E7E] block mt-0.5 font-medium">{t.duration}</span>
+                      <span className="text-[11px] text-[#536963]">{t.costRange}</span>
                     </div>
                   </div>
                 ))}
@@ -255,10 +255,10 @@ END:VCALENDAR`;
           {/* STEP 3: Doctor Selection */}
           {step === 3 && (
             <div className="space-y-4">
-              <h4 className="text-lg font-serif font-normal text-[#F2E9DC]">
+              <h4 className="text-lg font-serif font-normal text-[#1B2B27]">
                 Step 3: Choose Your Preferred Clinician
               </h4>
-              <p className="text-xs sm:text-sm text-[#A8B8B4]">
+              <p className="text-xs sm:text-sm text-[#536963]">
                 Select a specific dentist or allow us to assign the first available specialist.
               </p>
 
@@ -267,20 +267,20 @@ END:VCALENDAR`;
                   onClick={() => setSelectedDentistId('any')}
                   className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-center justify-between ${
                     selectedDentistId === 'any'
-                      ? 'border-teal-400 bg-teal-500/10 shadow-glow-teal ring-1 ring-teal-400/30'
-                      : 'border-white/10 hover:border-white/20 bg-[#131F1C]'
+                      ? 'border-[#3E8E7E] bg-[#3E8E7E]/08 shadow-sm ring-1 ring-[#3E8E7E]/30'
+                      : 'border-[#1B2B27]/08 hover:border-[#3E8E7E]/30 bg-white'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-teal-500/15 text-teal-300 border border-teal-500/30 flex items-center justify-center font-bold">
-                      <Sparkles className="w-5 h-5 text-teal-400" />
+                    <div className="w-10 h-10 rounded-xl bg-[#3E8E7E]/10 text-[#3E8E7E] border border-[#3E8E7E]/20 flex items-center justify-center font-bold">
+                      <Sparkles className="w-5 h-5 text-[#3E8E7E]" />
                     </div>
                     <div>
-                      <h5 className="font-medium text-sm text-[#F2E9DC]">First Available Specialist</h5>
-                      <p className="text-xs text-[#A8B8B4]">Fastest appointment availability guaranteed</p>
+                      <h5 className="font-semibold text-sm text-[#1B2B27]">First Available Specialist</h5>
+                      <p className="text-xs text-[#536963]">Fastest appointment availability guaranteed</p>
                     </div>
                   </div>
-                  {selectedDentistId === 'any' && <CheckCircle2 className="w-5 h-5 text-teal-400" />}
+                  {selectedDentistId === 'any' && <CheckCircle2 className="w-5 h-5 text-[#3E8E7E]" />}
                 </div>
 
                 {DENTISTS_DATA.map((doc) => (
@@ -289,19 +289,19 @@ END:VCALENDAR`;
                     onClick={() => setSelectedDentistId(doc.id)}
                     className={`p-3.5 rounded-2xl border cursor-pointer transition-all flex items-center justify-between ${
                       selectedDentistId === doc.id
-                        ? 'border-teal-400 bg-teal-500/10 shadow-glow-teal ring-1 ring-teal-400/30'
-                        : 'border-white/10 hover:border-white/20 bg-[#131F1C]'
+                        ? 'border-[#3E8E7E] bg-[#3E8E7E]/08 shadow-sm ring-1 ring-[#3E8E7E]/30'
+                        : 'border-[#1B2B27]/08 hover:border-[#3E8E7E]/30 bg-white'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <img src={doc.image} alt={doc.name} className="w-12 h-12 rounded-xl object-cover border border-white/10" />
+                      <img src={doc.image} alt={doc.name} className="w-12 h-12 rounded-xl object-cover border border-[#1B2B27]/08" />
                       <div>
-                        <h5 className="font-medium text-sm text-[#F2E9DC]">{doc.name}</h5>
-                        <p className="text-xs text-teal-400 font-medium">{doc.role}</p>
-                        <span className="text-[11px] text-[#A8B8B4]">Available: {doc.availableDays}</span>
+                        <h5 className="font-semibold text-sm text-[#1B2B27]">{doc.name}</h5>
+                        <p className="text-xs text-[#3E8E7E] font-medium">{doc.role}</p>
+                        <span className="text-[11px] text-[#536963]">Available: {doc.availableDays}</span>
                       </div>
                     </div>
-                    {selectedDentistId === doc.id && <CheckCircle2 className="w-5 h-5 text-teal-400" />}
+                    {selectedDentistId === doc.id && <CheckCircle2 className="w-5 h-5 text-[#3E8E7E]" />}
                   </div>
                 ))}
               </div>
@@ -311,13 +311,13 @@ END:VCALENDAR`;
           {/* STEP 4: Date & Time */}
           {step === 4 && (
             <div className="space-y-5">
-              <h4 className="text-lg font-serif font-normal text-[#F2E9DC]">
+              <h4 className="text-lg font-serif font-normal text-[#1B2B27]">
                 Step 4: Select Date & Time
               </h4>
 
               {/* Date Pills */}
               <div>
-                <label className="text-xs font-medium text-white/60 block mb-2">
+                <label className="text-xs font-semibold text-[#1B2B27] block mb-2">
                   Select Day
                 </label>
                 <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -328,12 +328,12 @@ END:VCALENDAR`;
                       onClick={() => setSelectedDate(`${d.label}, ${selectedTimeSlot}`)}
                       className={`p-2.5 rounded-xl border text-center transition-all ${
                         selectedDate.includes(d.label)
-                          ? 'bg-teal-400 text-teal-950 font-bold border-teal-400 shadow-glow-teal'
-                          : 'bg-[#131F1C] border-white/10 text-white/80 hover:border-white/20'
+                          ? 'bg-[#3E8E7E] text-white font-semibold border-[#3E8E7E] shadow-sm'
+                          : 'bg-white border-[#1B2B27]/10 text-[#1B2B27] hover:border-[#3E8E7E]/40'
                       }`}
                     >
-                      <span className="text-[11px] block">{d.label}</span>
-                      <span className="text-[10px] opacity-70 block">{d.date}</span>
+                      <span className="text-[11px] block font-medium">{d.label}</span>
+                      <span className="text-[10px] opacity-75 block">{d.date}</span>
                     </button>
                   ))}
                 </div>
@@ -341,7 +341,7 @@ END:VCALENDAR`;
 
               {/* Time Slots */}
               <div>
-                <label className="text-xs font-medium text-white/60 block mb-2">
+                <label className="text-xs font-semibold text-[#1B2B27] block mb-2">
                   Select Time Slot
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
@@ -355,12 +355,12 @@ END:VCALENDAR`;
                       }}
                       className={`p-3 rounded-xl border flex items-center justify-between text-xs font-medium transition-all ${
                         selectedTimeSlot === slot.time
-                          ? 'bg-teal-400 text-teal-950 font-bold border-teal-400 shadow-glow-teal'
-                          : 'bg-[#131F1C] border-white/10 text-white/80 hover:border-white/20'
+                          ? 'bg-[#3E8E7E] text-white font-semibold border-[#3E8E7E] shadow-sm'
+                          : 'bg-white border-[#1B2B27]/10 text-[#1B2B27] hover:border-[#3E8E7E]/40'
                       }`}
                     >
                       <span>{slot.time}</span>
-                      <span className="text-[10px] opacity-70">{slot.period}</span>
+                      <span className="text-[10px] opacity-75">{slot.period}</span>
                     </button>
                   ))}
                 </div>
@@ -371,60 +371,60 @@ END:VCALENDAR`;
           {/* STEP 5: Patient Details Form */}
           {step === 5 && (
             <form id="booking-form" onSubmit={handleCompleteBooking} className="space-y-4">
-              <h4 className="text-lg font-serif font-normal text-[#F2E9DC]">
+              <h4 className="text-lg font-serif font-normal text-[#1B2B27]">
                 Step 5: Patient Contact & Confirmation
               </h4>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
-                  <label className="text-xs font-medium text-white/70 block mb-1">Full Name *</label>
+                  <label className="text-xs font-semibold text-[#1B2B27] block mb-1">Full Name *</label>
                   <input
                     type="text"
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="e.g. Jessica Sterling"
-                    className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/15 bg-[#131F1C] text-white placeholder-white/40 focus:outline-none focus:border-teal-400"
+                    className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-[#1B2B27]/12 bg-white text-[#1B2B27] placeholder-[#536963]/50 focus:outline-none focus:border-[#3E8E7E]"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-medium text-white/70 block mb-1">Phone Number (SMS Confirmation) *</label>
+                  <label className="text-xs font-semibold text-[#1B2B27] block mb-1">Phone Number (SMS Confirmation) *</label>
                   <input
                     type="tel"
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+1 (555) 019-2834"
-                    className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/15 bg-[#131F1C] text-white placeholder-white/40 focus:outline-none focus:border-teal-400"
+                    className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-[#1B2B27]/12 bg-white text-[#1B2B27] placeholder-[#536963]/50 focus:outline-none focus:border-[#3E8E7E]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
-                  <label className="text-xs font-medium text-white/70 block mb-1">Email Address</label>
+                  <label className="text-xs font-semibold text-[#1B2B27] block mb-1">Email Address</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="jessica@example.com"
-                    className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/15 bg-[#131F1C] text-white placeholder-white/40 focus:outline-none focus:border-teal-400"
+                    className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-[#1B2B27]/12 bg-white text-[#1B2B27] placeholder-[#536963]/50 focus:outline-none focus:border-[#3E8E7E]"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-medium text-white/70 block mb-1">Dental Insurance Provider</label>
+                  <label className="text-xs font-semibold text-[#1B2B27] block mb-1">Dental Insurance Provider</label>
                   <input
                     type="text"
                     value={insurance}
                     onChange={(e) => setInsurance(e.target.value)}
                     placeholder="Delta Dental, Cigna, Aetna, or Cash"
-                    className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/15 bg-[#131F1C] text-white placeholder-white/40 focus:outline-none focus:border-teal-400"
+                    className="w-full text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-[#1B2B27]/12 bg-white text-[#1B2B27] placeholder-[#536963]/50 focus:outline-none focus:border-[#3E8E7E]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-medium text-white/70 block mb-1">
+                <label className="text-xs font-semibold text-[#1B2B27] block mb-1">
                   Symptoms or Notes for the Doctor (Optional)
                 </label>
                 <textarea
@@ -432,23 +432,23 @@ END:VCALENDAR`;
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Describe any sensitivity, cosmetic goals, or anxiety preferences..."
-                  className="w-full text-xs sm:text-sm p-3 rounded-xl border border-white/15 bg-[#131F1C] text-white placeholder-white/40 focus:outline-none focus:border-teal-400 resize-none"
+                  className="w-full text-xs sm:text-sm p-3 rounded-xl border border-[#1B2B27]/12 bg-white text-[#1B2B27] placeholder-[#536963]/50 focus:outline-none focus:border-[#3E8E7E] resize-none"
                 />
               </div>
 
               {/* Summary recap box */}
-              <div className="p-3.5 rounded-2xl bg-[#0A110F] border border-white/10 text-xs space-y-1 text-[#A8B8B4]">
+              <div className="p-3.5 rounded-2xl bg-[#F5F1EA] border border-[#1B2B27]/08 text-xs space-y-1 text-[#536963]">
                 <div className="flex justify-between">
                   <span>Procedure:</span>
-                  <strong className="text-[#F2E9DC]">{currentTreatment.title}</strong>
+                  <strong className="text-[#1B2B27]">{currentTreatment.title}</strong>
                 </div>
                 <div className="flex justify-between">
                   <span>Date & Slot:</span>
-                  <strong className="text-[#F2E9DC]">{selectedDate}</strong>
+                  <strong className="text-[#1B2B27]">{selectedDate}</strong>
                 </div>
                 <div className="flex justify-between">
                   <span>Doctor:</span>
-                  <strong className="text-[#F2E9DC]">{currentDentist ? currentDentist.name : 'First Available Specialist'}</strong>
+                  <strong className="text-[#1B2B27]">{currentDentist ? currentDentist.name : 'First Available Specialist'}</strong>
                 </div>
               </div>
             </form>
@@ -457,43 +457,43 @@ END:VCALENDAR`;
           {/* STEP 6: Confirmation Screen */}
           {step === 6 && (
             <div className="text-center py-4 space-y-6">
-              <div className="w-16 h-16 rounded-full bg-teal-500/20 text-teal-400 mx-auto flex items-center justify-center border border-teal-500/30 shadow-glow-teal animate-in zoom-in-50">
+              <div className="w-16 h-16 rounded-full bg-[#3E8E7E]/10 text-[#3E8E7E] mx-auto flex items-center justify-center border border-[#3E8E7E]/20 shadow-spa animate-in zoom-in-50">
                 <Check className="w-8 h-8 stroke-[3]" />
               </div>
 
               <div>
-                <span className="text-xs font-mono text-teal-400 font-medium tracking-wider">
+                <span className="text-xs font-mono text-[#3E8E7E] font-semibold tracking-wider">
                   Appointment Confirmed
                 </span>
-                <h4 className="text-2xl font-serif font-normal text-[#F2E9DC] mt-1">
+                <h4 className="text-2xl font-serif font-normal text-[#1B2B27] mt-1">
                   You’re Scheduled, {fullName}!
                 </h4>
-                <p className="text-xs sm:text-sm text-[#A8B8B4] max-w-md mx-auto mt-2">
+                <p className="text-xs sm:text-sm text-[#536963] max-w-md mx-auto mt-2">
                   A calendar invite and SMS reminder have been dispatched. Our concierge will welcome you in private comfort.
                 </p>
               </div>
 
               {/* Booking Confirmation Pass Card */}
-              <div className="bg-[#131F1C] rounded-2xl p-5 border border-white/10 max-w-md mx-auto text-left text-xs space-y-3">
-                <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                  <span className="text-white/50">Confirmation Code</span>
-                  <span className="font-mono font-bold text-teal-300 text-sm">{bookingCode}</span>
+              <div className="bg-white rounded-2xl p-5 border border-[#1B2B27]/08 max-w-md mx-auto text-left text-xs space-y-3 shadow-spa">
+                <div className="flex items-center justify-between pb-3 border-b border-[#1B2B27]/08">
+                  <span className="text-[#536963]">Confirmation Code</span>
+                  <span className="font-mono font-bold text-[#3E8E7E] text-sm">{bookingCode}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-white/50">Clinic</span>
-                  <span className="font-medium text-[#F2E9DC]">{clinic.name}</span>
+                  <span className="text-[#536963]">Clinic</span>
+                  <span className="font-semibold text-[#1B2B27]">{clinic.name}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-white/50">Treatment</span>
-                  <span className="font-medium text-[#F2E9DC]">{currentTreatment.title}</span>
+                  <span className="text-[#536963]">Treatment</span>
+                  <span className="font-semibold text-[#1B2B27]">{currentTreatment.title}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-white/50">Date & Time</span>
-                  <span className="font-medium text-[#F2E9DC]">{selectedDate}</span>
+                  <span className="text-[#536963]">Date & Time</span>
+                  <span className="font-semibold text-[#1B2B27]">{selectedDate}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-white/50">Location</span>
-                  <span className="font-medium text-[#F2E9DC]">{clinic.address}, {clinic.city}</span>
+                  <span className="text-[#536963]">Location</span>
+                  <span className="font-semibold text-[#1B2B27]">{clinic.address}, {clinic.city}</span>
                 </div>
               </div>
 
@@ -503,7 +503,7 @@ END:VCALENDAR`;
                   onClick={handleDownloadIcs}
                   className="btn-tactile-secondary w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-2"
                 >
-                  <Download className="w-4 h-4 text-teal-400" />
+                  <Download className="w-4 h-4 text-[#3E8E7E]" />
                   Add to Calendar (.ics)
                 </button>
                 <button
@@ -519,7 +519,7 @@ END:VCALENDAR`;
 
         {/* Modal Bottom Controls */}
         {step < 6 && (
-          <div className="p-4 sm:p-6 bg-[#0A110F] border-t border-white/10 flex items-center justify-between">
+          <div className="p-4 sm:p-6 bg-white border-t border-[#1B2B27]/08 flex items-center justify-between">
             {step > 1 ? (
               <button
                 type="button"
@@ -538,7 +538,7 @@ END:VCALENDAR`;
                 onClick={() => setStep(step + 1)}
                 className="btn-tactile-primary px-6 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-1.5"
               >
-                Continue <ArrowRight className="w-4 h-4 text-teal-950" />
+                Continue <ArrowRight className="w-4 h-4 text-white" />
               </button>
             ) : (
               <button
@@ -546,7 +546,7 @@ END:VCALENDAR`;
                 form="booking-form"
                 className="btn-tactile-primary px-6 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-1.5"
               >
-                Confirm Appointment <Check className="w-4 h-4 text-teal-950" />
+                Confirm Appointment <Check className="w-4 h-4 text-white" />
               </button>
             )}
           </div>

@@ -19,10 +19,10 @@ import { LocationContactSection } from './components/sections/LocationContactSec
 import { Footer } from './components/layout/Footer';
 import { BookingModal } from './components/booking/BookingModal';
 import { AiDentalAssistantModal } from './components/ai/AiDentalAssistantModal';
-import { Bot, Calendar, Sparkles } from 'lucide-react';
+import { Bot, Sparkles } from 'lucide-react';
 
 export function App() {
-  const [activeClinicId, setActiveClinicId] = useState<string>('aura');
+  const [activeClinicId] = useState<string>('aura');
   const [isBookingOpen, setIsBookingOpen] = useState<boolean>(false);
   const [isAiOpen, setIsAiOpen] = useState<boolean>(false);
   const [preselectedTreatment, setPreselectedTreatment] = useState<string>('veneers');
@@ -37,16 +37,16 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0A110F] text-[#F9FAF9] font-sans selection:bg-[#3ED9C0] selection:text-[#06201B]">
+    <div className="min-h-screen flex flex-col bg-[#FBFAF7] text-[#1B2B27] font-sans selection:bg-[#3E8E7E]/20 selection:text-[#1B2B27]">
 
-      {/* 2. Sticky Glassmorphic Navbar */}
+      {/* Sticky Glassmorphic Navbar */}
       <Navbar
         clinic={currentClinic}
         onOpenBooking={() => handleOpenBooking()}
         onOpenAi={() => setIsAiOpen(true)}
       />
 
-      {/* 3. Main Page Flow */}
+      {/* Main Page Flow */}
       <main className="flex-grow">
         {/* Hero Section with Interactive 3D Tooth */}
         <HeroSection
@@ -64,17 +64,16 @@ export function App() {
         />
 
         {/* Signature Interactive 3D Dental Arch & Anatomy Explorer */}
-        {/* Signature Interactive 3D Dental Arch & Anatomy Explorer */}
-        <section id="3d-explorer" className="py-24 bg-[#0A110F] text-[#F9FAF9] relative border-t border-white/[0.06]">
+        <section id="3d-explorer" className="py-24 bg-[#F5F1EA] text-[#1B2B27] relative border-t border-[#1B2B27]/08">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <DentalExplorer3D
-              onSelectTreatment={(name) => handleOpenBooking()}
+              onSelectTreatment={() => handleOpenBooking()}
               onBookConsultation={() => handleOpenBooking()}
             />
           </div>
         </section>
 
-        {/* 5-Step Animated Patient Treatment Journey */}
+        {/* 5-Step Patient Treatment Journey */}
         <TreatmentJourneySection
           onBookConsultation={() => handleOpenBooking()}
         />
@@ -84,7 +83,7 @@ export function App() {
           onBookConsultation={() => handleOpenBooking()}
         />
 
-        {/* World-Class Specialist Dentists */}
+        {/* Specialist Dentists */}
         <DoctorsSection
           onBookWithDoctor={(dentistId) => handleOpenBooking(undefined, dentistId)}
         />
@@ -129,43 +128,43 @@ export function App() {
         />
       </main>
 
-      {/* 4. Comprehensive Footer */}
+      {/* Comprehensive Footer */}
       <Footer
         clinic={currentClinic}
         onOpenBooking={() => handleOpenBooking()}
         onOpenAi={() => setIsAiOpen(true)}
       />
 
-      {/* 5. Persistent Mobile Bottom Action Bar */}
+      {/* Persistent Mobile Bottom Action Bar */}
       <MobileBottomBar
         clinic={currentClinic}
         onOpenBooking={() => handleOpenBooking()}
         onOpenAi={() => setIsAiOpen(true)}
       />
 
-      {/* 6. Desktop Floating AI Assistant Quick Trigger Button */}
+      {/* Desktop Floating AI Assistant Quick Trigger Button */}
       <div className="hidden lg:block fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setIsAiOpen(true)}
-          className="glass-clinical hover:border-[#3ED9C0]/50 flex items-center gap-3 px-5 py-3.5 rounded-2xl text-[#F9FAF9] shadow-[0_15px_35px_rgba(0,0,0,0.8)] backdrop-blur-2xl transition-all hover:-translate-y-1 group"
+          className="glass-spa hover:border-[#3E8E7E]/40 flex items-center gap-3 px-5 py-3.5 rounded-2xl text-[#1B2B27] shadow-spa hover:shadow-spa-hover transition-all hover:-translate-y-1 group"
         >
           <div className="relative">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#3ED9C0] to-[#1E8D7B] flex items-center justify-center text-[#07221C] shadow-[0_0_15px_rgba(62,217,192,0.4)] font-bold">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#3E8E7E] to-[#5FA592] flex items-center justify-center text-white shadow-md font-bold">
               <Bot className="w-4 h-4" />
             </div>
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#3ED9C0] animate-ping" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#5FA592] animate-ping" />
           </div>
           <div className="text-left">
-            <span className="text-xs font-semibold block flex items-center gap-1.5 text-[#F9FAF9]">
+            <span className="text-xs font-semibold block flex items-center gap-1.5 text-[#1B2B27]">
               AI Clinical Concierge
-              <Sparkles className="w-3 h-3 text-[#3ED9C0]" />
+              <Sparkles className="w-3 h-3 text-[#3E8E7E]" />
             </span>
-            <span className="text-[10px] text-[#A8B8B4] block -mt-0.5">Instant Medical Triage</span>
+            <span className="text-[10px] text-[#536963] block -mt-0.5">Instant Medical Triage</span>
           </div>
         </button>
       </div>
 
-      {/* 7. Conversion Modals */}
+      {/* Conversion Modals */}
       <BookingModal
         clinic={currentClinic}
         isOpen={isBookingOpen}

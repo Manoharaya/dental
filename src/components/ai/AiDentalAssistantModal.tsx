@@ -162,25 +162,25 @@ export const AiDentalAssistantModal: React.FC<AiDentalAssistantModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:justify-end p-0 sm:p-6 bg-black/75 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="w-full sm:w-[460px] h-[94vh] sm:h-[650px] bg-[#0E1614] rounded-t-3xl sm:rounded-3xl shadow-2xl border border-white/15 flex flex-col overflow-hidden relative text-[#F9FAF9]">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:justify-end p-0 sm:p-6 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="w-full sm:w-[460px] h-[94vh] sm:h-[650px] bg-[#FBFAF7] rounded-t-3xl sm:rounded-3xl shadow-2xl border border-[#1B2B27]/10 flex flex-col overflow-hidden relative text-[#1B2B27]">
         {/* Header */}
-        <div className="bg-[#0A110F] text-white p-4 sm:p-5 flex items-center justify-between relative z-10 border-b border-white/10">
+        <div className="bg-white text-[#1B2B27] p-4 sm:p-5 flex items-center justify-between relative z-10 border-b border-[#1B2B27]/08">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-10 h-10 rounded-2xl bg-teal-500/20 text-teal-300 border border-teal-500/40 flex items-center justify-center shadow-glow-teal">
-                <Bot className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-2xl bg-[#3E8E7E]/10 text-[#3E8E7E] border border-[#3E8E7E]/20 flex items-center justify-center shadow-spa">
+                <Bot className="w-5 h-5 text-[#3E8E7E]" />
               </div>
-              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-teal-400 border-2 border-[#0A110F]" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#3E8E7E] border-2 border-white" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-serif font-normal text-base text-[#F2E9DC]">Ava Clinical AI</h3>
-                <span className="text-[10px] bg-teal-500/15 text-teal-300 px-2 py-0.5 rounded-full border border-teal-500/30">
+                <h3 className="font-serif font-normal text-base text-[#1B2B27]">Ava Clinical AI</h3>
+                <span className="text-[10px] bg-[#3E8E7E]/10 text-[#3E8E7E] px-2 py-0.5 rounded-full border border-[#3E8E7E]/20 font-semibold">
                   Online 24/7
                 </span>
               </div>
-              <p className="text-xs text-[#A8B8B4]">{clinic.name} Concierge</p>
+              <p className="text-xs text-[#536963]">{clinic.name} Concierge</p>
             </div>
           </div>
 
@@ -190,7 +190,7 @@ export const AiDentalAssistantModal: React.FC<AiDentalAssistantModalProps> = ({
               onClick={() => setIsVoiceMode(!isVoiceMode)}
               title={isVoiceMode ? 'Switch to text chat' : 'Switch to voice mode'}
               className={`p-2 rounded-xl transition-all ${
-                isVoiceMode ? 'bg-teal-400 text-teal-950 shadow-glow-teal font-bold' : 'text-white/60 hover:text-white hover:bg-white/10'
+                isVoiceMode ? 'bg-[#3E8E7E] text-white shadow-sm font-bold' : 'text-[#536963] hover:text-[#1B2B27] hover:bg-[#1B2B27]/05'
               }`}
             >
               <Volume2 className="w-4 h-4" />
@@ -199,7 +199,7 @@ export const AiDentalAssistantModal: React.FC<AiDentalAssistantModalProps> = ({
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-2 rounded-xl text-[#536963] hover:text-[#1B2B27] hover:bg-[#1B2B27]/05 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -208,26 +208,26 @@ export const AiDentalAssistantModal: React.FC<AiDentalAssistantModalProps> = ({
 
         {/* Voice Mode Simulation Screen */}
         {isVoiceMode ? (
-          <div className="flex-1 bg-[#0A110F] text-white p-6 flex flex-col items-center justify-between">
+          <div className="flex-1 bg-[#FBFAF7] text-[#1B2B27] p-6 flex flex-col items-center justify-between">
             <div className="text-center pt-8">
-              <span className="text-xs font-mono text-teal-400 font-medium tracking-wider">
+              <span className="text-xs font-mono text-[#3E8E7E] font-semibold tracking-wider">
                 Voice Assistant Mode
               </span>
-              <h4 className="text-xl font-serif font-normal text-[#F2E9DC] mt-1">Speak Naturally with Ava</h4>
-              <p className="text-xs text-[#A8B8B4] max-w-xs mx-auto mt-2">
+              <h4 className="text-xl font-serif font-normal text-[#1B2B27] mt-1">Speak Naturally with Ava</h4>
+              <p className="text-xs text-[#536963] max-w-xs mx-auto mt-2">
                 Ask about dental procedures, emergency triage, or clinic schedule.
               </p>
             </div>
 
             {/* Audio Waveform Visualization */}
             <div className="flex items-center justify-center gap-1.5 h-32 my-6">
-              <div className="w-1.5 bg-teal-400 rounded-full wave-bar-1" />
-              <div className="w-1.5 bg-teal-300 rounded-full wave-bar-2" />
-              <div className="w-1.5 bg-teal-500 rounded-full wave-bar-3" />
-              <div className="w-1.5 bg-[#F2E9DC] rounded-full wave-bar-4" />
-              <div className="w-1.5 bg-teal-400 rounded-full wave-bar-5" />
-              <div className="w-1.5 bg-teal-300 rounded-full wave-bar-2" />
-              <div className="w-1.5 bg-[#F2E9DC] rounded-full wave-bar-1" />
+              <div className="w-1.5 bg-[#3E8E7E] rounded-full wave-bar-1" />
+              <div className="w-1.5 bg-[#5FA592] rounded-full wave-bar-2" />
+              <div className="w-1.5 bg-[#3E8E7E] rounded-full wave-bar-3" />
+              <div className="w-1.5 bg-[#1B2B27] rounded-full wave-bar-4" />
+              <div className="w-1.5 bg-[#3E8E7E] rounded-full wave-bar-5" />
+              <div className="w-1.5 bg-[#5FA592] rounded-full wave-bar-2" />
+              <div className="w-1.5 bg-[#1B2B27] rounded-full wave-bar-1" />
             </div>
 
             <div className="w-full text-center pb-6 space-y-4">
@@ -236,17 +236,17 @@ export const AiDentalAssistantModal: React.FC<AiDentalAssistantModalProps> = ({
                 className={`w-16 h-16 rounded-full mx-auto flex items-center justify-center transition-all ${
                   isListening
                     ? 'bg-rose-500 text-white animate-pulse shadow-lg shadow-rose-500/50'
-                    : 'btn-tactile-primary'
+                    : 'btn-tactile-primary text-white'
                 }`}
               >
-                <Mic className="w-7 h-7 text-teal-950" />
+                <Mic className="w-7 h-7 text-white" />
               </button>
-              <p className="text-xs text-[#A8B8B4]">
+              <p className="text-xs text-[#536963]">
                 {isListening ? 'Listening to your voice...' : 'Tap microphone to speak'}
               </p>
               <button
                 onClick={() => setIsVoiceMode(false)}
-                className="text-xs text-teal-400 hover:underline"
+                className="text-xs text-[#3E8E7E] font-medium hover:underline"
               >
                 Return to Text Chat
               </button>
@@ -256,26 +256,26 @@ export const AiDentalAssistantModal: React.FC<AiDentalAssistantModalProps> = ({
           /* Normal Text Chat Screen */
           <>
             {/* Messages Scroll Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#0A110F]/60">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#F5F1EA]/50">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
                   className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
                 >
                   <div
-                    className={`max-w-[85%] rounded-2xl p-3.5 text-xs sm:text-sm leading-relaxed shadow-sm ${
+                    className={`max-w-[85%] rounded-2xl p-3.5 text-xs sm:text-sm leading-relaxed shadow-spa ${
                       msg.sender === 'user'
-                        ? 'bg-teal-400 text-teal-950 rounded-br-none font-medium'
+                        ? 'bg-[#3E8E7E] text-white rounded-br-none font-medium'
                         : msg.isEmergency
-                        ? 'bg-rose-950/40 text-rose-200 border border-rose-500/30 rounded-bl-none'
-                        : 'bg-[#131F1C] text-[#F2E9DC] border border-white/10 rounded-bl-none'
+                        ? 'bg-rose-50 text-rose-800 border border-rose-200 rounded-bl-none'
+                        : 'bg-white text-[#1B2B27] border border-[#1B2B27]/08 rounded-bl-none'
                     }`}
                   >
                     {msg.text}
 
                     {/* Contextual Action Buttons */}
                     {msg.actionButton && (
-                      <div className="mt-3 pt-2.5 border-t border-white/10 flex flex-wrap gap-2">
+                      <div className="mt-3 pt-2.5 border-t border-[#1B2B27]/08 flex flex-wrap gap-2">
                         {msg.actionButton.action === 'book' || msg.actionButton.action === 'emergency' ? (
                           <button
                             onClick={() => {
@@ -285,37 +285,37 @@ export const AiDentalAssistantModal: React.FC<AiDentalAssistantModalProps> = ({
                             className={`px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
                               msg.actionButton.action === 'emergency'
                                 ? 'bg-rose-600 hover:bg-rose-700 text-white shadow-md'
-                                : 'btn-tactile-primary'
+                                : 'btn-tactile-primary text-white'
                             }`}
                           >
-                            <Calendar className="w-3.5 h-3.5 text-teal-950" />
+                            <Calendar className="w-3.5 h-3.5 text-white" />
                             <span>{msg.actionButton.label}</span>
-                            <ChevronRight className="w-3.5 h-3.5 text-teal-950" />
+                            <ChevronRight className="w-3.5 h-3.5 text-white" />
                           </button>
                         ) : null}
 
                         {msg.isEmergency && (
                           <a
                             href={`tel:${clinic.emergencyPhone}`}
-                            className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#0A110F] text-white flex items-center gap-1.5 hover:bg-white/10 border border-white/10"
+                            className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white text-rose-700 flex items-center gap-1.5 hover:bg-rose-50 border border-rose-200"
                           >
-                            <Phone className="w-3.5 h-3.5 text-teal-400" />
+                            <Phone className="w-3.5 h-3.5 text-rose-600" />
                             Call Emergency: {clinic.emergencyPhone}
                           </a>
                         )}
                       </div>
                     )}
                   </div>
-                  <span className="text-[10px] text-white/40 mt-1 px-1">{msg.timestamp}</span>
+                  <span className="text-[10px] text-[#536963]/60 mt-1 px-1">{msg.timestamp}</span>
                 </div>
               ))}
 
               {isTyping && (
-                <div className="flex items-center gap-2 text-[#A8B8B4] text-xs bg-[#131F1C] p-3 rounded-2xl border border-white/10 w-fit">
+                <div className="flex items-center gap-2 text-[#536963] text-xs bg-white p-3 rounded-2xl border border-[#1B2B27]/08 w-fit shadow-spa">
                   <div className="flex gap-1">
-                    <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce" />
-                    <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce [animation-delay:0.2s]" />
-                    <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce [animation-delay:0.4s]" />
+                    <span className="w-1.5 h-1.5 bg-[#3E8E7E] rounded-full animate-bounce" />
+                    <span className="w-1.5 h-1.5 bg-[#3E8E7E] rounded-full animate-bounce [animation-delay:0.2s]" />
+                    <span className="w-1.5 h-1.5 bg-[#3E8E7E] rounded-full animate-bounce [animation-delay:0.4s]" />
                   </div>
                   <span>Ava is consulting clinical database...</span>
                 </div>
@@ -324,12 +324,12 @@ export const AiDentalAssistantModal: React.FC<AiDentalAssistantModalProps> = ({
             </div>
 
             {/* Quick Prompt Carousel */}
-            <div className="p-2.5 bg-[#0A110F] border-t border-white/10 overflow-x-auto flex gap-1.5 no-scrollbar">
+            <div className="p-2.5 bg-white border-t border-[#1B2B27]/08 overflow-x-auto flex gap-1.5 no-scrollbar">
               {quickPrompts.map((prompt, i) => (
                 <button
                   key={i}
                   onClick={() => handleSendMessage(prompt)}
-                  className="px-3 py-1.5 bg-[#131F1C] hover:bg-white/10 text-[#A8B8B4] hover:text-teal-300 text-[11px] font-medium rounded-full border border-white/10 shrink-0 transition-colors"
+                  className="px-3 py-1.5 bg-[#FBFAF7] hover:bg-[#F5F1EA] text-[#536963] hover:text-[#1B2B27] text-[11px] font-medium rounded-full border border-[#1B2B27]/08 shrink-0 transition-colors"
                 >
                   {prompt}
                 </button>
@@ -342,21 +342,21 @@ export const AiDentalAssistantModal: React.FC<AiDentalAssistantModalProps> = ({
                 e.preventDefault();
                 handleSendMessage();
               }}
-              className="p-3 bg-[#0A110F] border-t border-white/10 flex items-center gap-2"
+              className="p-3 bg-white border-t border-[#1B2B27]/08 flex items-center gap-2"
             >
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Ask about treatments, pricing, emergency..."
-                className="flex-1 text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-white/15 bg-[#131F1C] text-white placeholder-white/40 focus:outline-none focus:border-teal-400"
+                className="flex-1 text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-[#1B2B27]/12 bg-[#FBFAF7] text-[#1B2B27] placeholder-[#536963]/50 focus:outline-none focus:border-[#3E8E7E]"
               />
               <button
                 type="submit"
                 disabled={!inputValue.trim()}
-                className="btn-tactile-primary p-2.5 rounded-xl disabled:opacity-40"
+                className="btn-tactile-primary p-2.5 rounded-xl disabled:opacity-40 text-white"
               >
-                <Send className="w-4 h-4 text-teal-950" />
+                <Send className="w-4 h-4 text-white" />
               </button>
             </form>
           </>

@@ -21,34 +21,34 @@ export const EmergencySection: React.FC<EmergencySectionProps> = ({
   ];
 
   return (
-    <section className="py-20 bg-[#0A110F] text-[#F9FAF9] relative overflow-hidden border-t border-white/5">
-      {/* Soft ambient urgency glow */}
-      <div className="absolute top-0 right-10 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
+    <section className="py-20 bg-[#FBFAF7] text-[#1B2B27] relative overflow-hidden border-t border-[#1B2B27]/08">
+      {/* Soft ambient urgency glow in pastel blush */}
+      <div className="absolute top-0 right-10 w-96 h-96 bg-[#F9EBE7]/70 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#D4EFE8]/40 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="bg-[#0E1614] border border-rose-500/20 rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div className="bg-[#FFF8F6] border border-[#F3D7D0] rounded-3xl p-6 sm:p-10 shadow-spa relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             {/* Left: Urgency Value Proposition */}
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/25 text-rose-300 text-xs font-medium">
-                <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100/80 border border-rose-200/80 text-rose-800 text-xs font-medium">
+                <AlertCircle className="w-3.5 h-3.5 text-rose-600" />
                 Guaranteed Same-Day Emergency Care
               </div>
 
-              <h2 className="text-2xl sm:text-4xl font-serif font-light text-[#F2E9DC] tracking-tight leading-snug">
+              <h2 className="text-2xl sm:text-4xl font-serif font-normal text-[#1B2B27] tracking-tight leading-snug">
                 Have an Urgent Dental Emergency? We’re Here to Help.
               </h2>
 
-              <p className="text-xs sm:text-base text-[#A8B8B4] leading-relaxed max-w-xl">
-                Acute dental pain, fractured crowns, or facial trauma cannot wait. Our clinicians prioritize rapid pain alleviation, digital diagnostics, and tooth preservation immediately.
+              <p className="text-xs sm:text-base text-[#536963] leading-relaxed max-w-xl">
+                Acute dental pain, fractured crowns, or trauma cannot wait. Our clinicians prioritize rapid pain alleviation, digital diagnostics, and tooth preservation immediately.
               </p>
 
               {/* Three Primary Actions */}
               <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-2">
                 <a
                   href={`tel:${clinic.emergencyPhone}`}
-                  className="py-3.5 px-5 rounded-xl bg-gradient-to-b from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-rose-950/40 border-t border-rose-400/30 flex items-center justify-center gap-2 transition-all w-full sm:w-auto text-center"
+                  className="py-3.5 px-5 rounded-xl bg-gradient-to-b from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-semibold text-xs sm:text-sm shadow-md shadow-rose-900/20 border-t border-rose-400/40 flex items-center justify-center gap-2 transition-all w-full sm:w-auto text-center"
                 >
                   <Phone className="w-4 h-4 shrink-0" />
                   <span>Call Emergency Hotline: {clinic.emergencyPhone}</span>
@@ -56,32 +56,32 @@ export const EmergencySection: React.FC<EmergencySectionProps> = ({
 
                 <button
                   onClick={onOpenBooking}
-                  className="btn-tactile-primary py-3.5 px-5 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 w-full sm:w-auto text-center"
+                  className="btn-tactile-primary py-3.5 px-5 text-xs sm:text-sm flex items-center justify-center gap-2 w-full sm:w-auto text-center"
                 >
-                  <Calendar className="w-4 h-4 text-teal-950 shrink-0" />
+                  <Calendar className="w-4 h-4 text-white shrink-0" />
                   <span>Request Emergency Slot Online</span>
                 </button>
 
                 <button
                   onClick={onOpenAi}
-                  className="btn-tactile-secondary py-3.5 px-5 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 w-full sm:w-auto text-center"
+                  className="btn-tactile-secondary py-3.5 px-5 text-xs sm:text-sm flex items-center justify-center gap-2 w-full sm:w-auto text-center"
                 >
-                  <Bot className="w-4 h-4 text-teal-400 shrink-0" />
-                  <span>Triage with AI Receptionist</span>
+                  <Bot className="w-4 h-4 text-[#3E8E7E] shrink-0" />
+                  <span>Triage with AI Concierge</span>
                 </button>
               </div>
             </div>
 
             {/* Right: Quick First-Aid Advice Guide */}
-            <div className="lg:col-span-5 bg-[#131F1C] rounded-2xl p-5 border border-white/10 space-y-3 text-xs">
-              <span className="font-mono text-rose-300/90 text-[11px] font-medium tracking-wider block">
+            <div className="lg:col-span-5 bg-white rounded-2xl p-5 border border-[#F3D7D0] space-y-3 text-xs shadow-sm">
+              <span className="font-mono text-rose-800 text-[11px] font-semibold tracking-wide block">
                 Immediate First-Aid Protocol
               </span>
 
               {commonEmergencies.map((em, idx) => (
-                <div key={idx} className="p-3 bg-[#0A110F]/80 rounded-xl border border-white/5">
-                  <span className="font-medium text-[#F2E9DC] block mb-0.5">{em.title}</span>
-                  <p className="text-[#A8B8B4] leading-relaxed text-[11px]">{em.advice}</p>
+                <div key={idx} className="p-3 bg-[#FFFBFB] rounded-xl border border-[#F3D7D0]/60">
+                  <span className="font-medium text-[#1B2B27] block mb-0.5">{em.title}</span>
+                  <p className="text-[#536963] leading-relaxed text-[11px]">{em.advice}</p>
                 </div>
               ))}
             </div>

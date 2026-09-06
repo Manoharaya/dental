@@ -13,21 +13,21 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
   const [selectedDoctor, setSelectedDoctor] = useState<Dentist | null>(null);
 
   return (
-    <section id="dentists" className="py-24 bg-[#0A110F] relative overflow-hidden border-t border-white/5">
+    <section id="dentists" className="py-24 bg-[#FBFAF7] relative overflow-hidden border-t border-[#1B2B27]/08">
       {/* Ambient background glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-[#D4EFE8]/40 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-medium mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#1B2B27]/08 text-[#3E8E7E] text-xs font-medium mb-3 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[#3E8E7E]" />
             Clinical Faculty & Specialists
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-light text-[#F2E9DC] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal text-[#1B2B27] tracking-tight">
             Meet Your Dental Specialists
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-[#A8B8B4] leading-relaxed">
+          <p className="mt-3 text-base sm:text-lg text-[#536963] leading-relaxed">
             Pioneering clinicians combining Ivy League academic credentials, fine-arts aesthetic mastery, and empathetic bedside warmth.
           </p>
         </div>
@@ -37,42 +37,41 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
           {DENTISTS_DATA.map((doc) => (
             <div
               key={doc.id}
-              className="glass-clinical hover:border-teal-500/40 rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 flex flex-col justify-between group hover:shadow-glow-teal"
+              className="glass-spa rounded-3xl overflow-hidden transition-all duration-300 flex flex-col justify-between group shadow-spa hover:shadow-spa-hover border border-[#1B2B27]/08"
             >
               <div>
                 {/* Doctor Portrait Image */}
-                <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-[#0E1614]">
+                <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-[#F5F1EA]">
                   <img
                     src={doc.image}
                     alt={doc.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A110F] via-transparent to-transparent opacity-80" />
                   
-                  <div className="absolute top-3 right-3 bg-[#0A110F]/85 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-medium text-[#F2E9DC] border border-white/10 flex items-center gap-1 shadow-sm">
-                    <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-medium text-[#1B2B27] border border-[#1B2B27]/08 flex items-center gap-1 shadow-sm">
+                    <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
                     <span>{doc.rating}</span>
-                    <span className="text-white/50 font-normal">({doc.reviewCount})</span>
+                    <span className="text-[#536963] font-normal">({doc.reviewCount})</span>
                   </div>
-                  <div className="absolute bottom-3 left-3 bg-[#0E1614]/90 backdrop-blur-md text-teal-300 text-[11px] font-medium px-2.5 py-1 rounded-full border border-teal-500/20">
+                  <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md text-[#1B2B27] text-[11px] font-medium px-2.5 py-1 rounded-full border border-[#1B2B27]/08 shadow-sm">
                     {doc.experienceYears}+ Years Clinical Exp.
                   </div>
                 </div>
 
                 {/* Body Content */}
                 <div className="p-4 sm:p-5">
-                  <span className="text-[11px] font-mono text-teal-400 font-medium tracking-wider block">
+                  <span className="text-[11px] font-mono text-[#3E8E7E] font-medium tracking-wide block">
                     {doc.credentials}
                   </span>
-                  <h3 className="text-base sm:text-lg font-serif font-normal text-[#F2E9DC] mt-1 group-hover:text-teal-300 transition-colors">
+                  <h3 className="text-base sm:text-lg font-serif font-normal text-[#1B2B27] mt-1 group-hover:text-[#3E8E7E] transition-colors">
                     {doc.name}
                   </h3>
-                  <p className="text-xs font-medium text-white/70 mt-0.5">{doc.role}</p>
-                  <p className="text-[11px] text-teal-300 bg-teal-500/10 border border-teal-500/20 px-2.5 py-1 rounded-lg mt-2.5 inline-block font-medium">
+                  <p className="text-xs font-medium text-[#536963] mt-0.5">{doc.role}</p>
+                  <p className="text-[11px] text-[#1B2B27] bg-[#D4EFE8] border border-[#3E8E7E]/20 px-2.5 py-1 rounded-lg mt-2.5 inline-block font-medium">
                     {doc.specialization}
                   </p>
 
-                  <p className="text-xs text-[#A8B8B4] mt-2.5 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-[#536963] mt-2.5 line-clamp-2 leading-relaxed">
                     {doc.bio}
                   </p>
                 </div>
@@ -85,13 +84,13 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
                   className="btn-tactile-secondary w-full py-2.5 px-3 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5"
                 >
                   <span>Credentials & Background</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-white/40" />
+                  <ChevronRight className="w-3.5 h-3.5 text-[#536963]" />
                 </button>
                 <button
                   onClick={() => onBookWithDoctor(doc.id)}
                   className="btn-tactile-primary w-full py-2.5 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5"
                 >
-                  <Calendar className="w-3.5 h-3.5 text-teal-950" />
+                  <Calendar className="w-3.5 h-3.5 text-white" />
                   <span>Book with {doc.name.split(' ')[1]}</span>
                 </button>
               </div>
@@ -99,13 +98,13 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
           ))}
         </div>
 
-        {/* Doctor Bio Modal (Bottom-sheet on mobile, centered dialog on desktop) */}
+        {/* Doctor Bio Modal */}
         {selectedDoctor && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/75 backdrop-blur-md animate-in fade-in">
-            <div className="bg-[#0E1614] text-[#F9FAF9] rounded-t-3xl sm:rounded-3xl max-w-xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto p-5 sm:p-8 relative shadow-2xl border border-white/15">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-sm animate-in fade-in">
+            <div className="bg-[#FBFAF7] text-[#1B2B27] rounded-t-3xl sm:rounded-3xl max-w-xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto p-5 sm:p-8 relative shadow-2xl border border-[#1B2B27]/10">
               <button
                 onClick={() => setSelectedDoctor(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-colors"
+                className="absolute top-4 right-4 p-2 rounded-full bg-white hover:bg-[#F5F1EA] text-[#536963] hover:text-[#1B2B27] transition-colors border border-[#1B2B27]/08"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -114,16 +113,16 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
                 <img
                   src={selectedDoctor.image}
                   alt={selectedDoctor.name}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-white/10 shrink-0"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-[#1B2B27]/08 shrink-0"
                 />
                 <div>
-                  <span className="text-xs font-mono text-teal-400 font-medium tracking-wider">
+                  <span className="text-xs font-mono text-[#3E8E7E] font-medium tracking-wide">
                     {selectedDoctor.credentials}
                   </span>
-                  <h3 className="text-xl font-serif font-normal text-[#F2E9DC]">{selectedDoctor.name}</h3>
-                  <p className="text-xs text-white/70 font-medium">{selectedDoctor.role}</p>
-                  <div className="flex items-center gap-2 mt-1.5 text-xs text-[#A8B8B4]">
-                    <span className="flex items-center gap-1 text-amber-400 font-medium">
+                  <h3 className="text-xl font-serif font-normal text-[#1B2B27]">{selectedDoctor.name}</h3>
+                  <p className="text-xs text-[#536963] font-medium">{selectedDoctor.role}</p>
+                  <div className="flex items-center gap-2 mt-1.5 text-xs text-[#536963]">
+                    <span className="flex items-center gap-1 text-amber-600 font-medium">
                       <Star className="w-3.5 h-3.5 fill-amber-400" /> {selectedDoctor.rating}
                     </span>
                     <span>•</span>
@@ -132,35 +131,35 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
                 </div>
               </div>
 
-              <div className="space-y-4 text-xs sm:text-sm text-[#A8B8B4] leading-relaxed mb-6">
+              <div className="space-y-4 text-xs sm:text-sm text-[#536963] leading-relaxed mb-6">
                 <p>{selectedDoctor.bio}</p>
 
-                <div className="bg-[#131F1C] p-4 rounded-2xl border border-white/10 space-y-3">
+                <div className="bg-white p-4 rounded-2xl border border-[#1B2B27]/08 space-y-3 shadow-sm">
                   <div>
-                    <h5 className="font-medium text-[#F2E9DC] flex items-center gap-1.5 text-xs mb-1.5">
-                      <GraduationCap className="w-4 h-4 text-teal-400" /> Formal Clinical Education:
+                    <h5 className="font-medium text-[#1B2B27] flex items-center gap-1.5 text-xs mb-1.5">
+                      <GraduationCap className="w-4 h-4 text-[#3E8E7E]" /> Formal Clinical Education:
                     </h5>
-                    <ul className="list-disc list-inside text-xs text-[#A8B8B4] space-y-1 pl-1">
+                    <ul className="list-disc list-inside text-xs text-[#536963] space-y-1 pl-1">
                       {selectedDoctor.education.map((edu, i) => (
                         <li key={i}>{edu}</li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="pt-2.5 border-t border-white/10">
-                    <h5 className="font-medium text-[#F2E9DC] flex items-center gap-1.5 text-xs mb-1.5">
-                      <Award className="w-4 h-4 text-teal-400" /> Academic & Professional Memberships:
+                  <div className="pt-2.5 border-t border-[#1B2B27]/08">
+                    <h5 className="font-medium text-[#1B2B27] flex items-center gap-1.5 text-xs mb-1.5">
+                      <Award className="w-4 h-4 text-[#3E8E7E]" /> Academic & Professional Memberships:
                     </h5>
-                    <ul className="list-disc list-inside text-xs text-[#A8B8B4] space-y-1 pl-1">
+                    <ul className="list-disc list-inside text-xs text-[#536963] space-y-1 pl-1">
                       {selectedDoctor.memberships.map((mem, i) => (
                         <li key={i}>{mem}</li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="pt-2.5 border-t border-white/10 flex items-center gap-2 text-xs">
-                    <Globe className="w-4 h-4 text-teal-400" />
-                    <span className="font-medium text-[#F2E9DC]">Languages:</span>
+                  <div className="pt-2.5 border-t border-[#1B2B27]/08 flex items-center gap-2 text-xs">
+                    <Globe className="w-4 h-4 text-[#3E8E7E]" />
+                    <span className="font-medium text-[#1B2B27]">Languages:</span>
                     <span>{selectedDoctor.languages.join(', ')}</span>
                   </div>
                 </div>
@@ -174,7 +173,7 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
                 }}
                 className="btn-tactile-primary w-full py-3.5 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"
               >
-                <Calendar className="w-4 h-4 text-teal-950" />
+                <Calendar className="w-4 h-4 text-white" />
                 Schedule Consultation with {selectedDoctor.name}
               </button>
             </div>

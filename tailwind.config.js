@@ -7,55 +7,56 @@ export default {
   theme: {
     extend: {
       colors: {
+        spa: {
+          base: '#FBFAF7',     // Soft porcelain white base
+          ivory: '#F5F1EA',    // Warm ivory surface
+          surface: '#FFFFFF',  // Pure white card base
+          charcoal: '#1B2B27', // Deep charcoal-teal text
+          muted: '#536963',    // Soft charcoal-teal body text
+          teal: '#3E8E7E',     // Primary cool sage-teal accent
+          'teal-hover': '#337769',
+          sage: '#5FA592',     // Secondary sage accent
+          mint: '#D4EFE8',     // Pale mint ambient glow
+          blush: '#F9EBE7',    // Soft blush ambient glow
+          border: 'rgba(27, 43, 39, 0.08)', // Hairline border
+        },
         clinic: {
-          base: '#0A110F',
-          surface: '#0E1614',
-          card: '#131F1C',
-          'card-hover': '#182723',
-          border: 'rgba(62, 217, 192, 0.12)',
-          'border-light': 'rgba(255, 255, 255, 0.07)',
+          base: '#FBFAF7',
+          surface: '#F5F1EA',
+          card: '#FFFFFF',
+          'card-hover': '#FFFFFF',
+          border: 'rgba(27, 43, 39, 0.08)',
+          'border-light': 'rgba(27, 43, 39, 0.05)',
         },
         teal: {
-          300: '#7CEBD8',
-          400: '#52E0C7',
-          500: '#3ED9C0', // Precision Mint-Teal
-          600: '#2BB9A2',
-          700: '#1E8D7B',
-        },
-        porcelain: {
-          DEFAULT: '#F2E9DC', // Warm Porcelain Ivory
-          muted: '#C5BDB2',
-          dark: '#9E968B',
-        },
-        sage: {
-          muted: '#A8B8B4',
-          light: '#D1DED9',
-          dark: '#53635F',
+          50: '#F0F9F7',
+          100: '#D4EFE8',
+          200: '#ADE2D5',
+          300: '#84D1C0',
+          400: '#5FA592',
+          500: '#3E8E7E', // Cool sage-teal
+          600: '#337769',
+          700: '#275E53',
+          800: '#1C453D',
+          900: '#1B2B27', // Deep charcoal-teal
         },
         brand: {
-          50: '#F0FDFB',
-          100: '#CCFBF4',
-          200: '#99F6E6',
-          300: '#5EEAD4',
-          400: '#52E0C7',
-          500: '#3ED9C0', // Clinical-luxe mint-teal
-          600: '#2BB9A2',
-          700: '#1E8D7B',
-          800: '#136356',
-          900: '#0E483F',
-          950: '#062C27',
+          50: '#F0F9F7',
+          100: '#D4EFE8',
+          200: '#ADE2D5',
+          300: '#84D1C0',
+          400: '#5FA592',
+          500: '#3E8E7E',
+          600: '#337769',
+          700: '#275E53',
+          800: '#1C453D',
+          900: '#1B2B27',
         },
         luxury: {
-          gold: '#C5A880',
-          'gold-light': '#DFC4A4',
-          'gold-dark': '#A0825B',
-          champagne: '#F7F3EE',
-          slate: '#0E1614',
-          navy: '#0A110F',
-          card: '#131F1C',
-          border: 'rgba(62, 217, 192, 0.12)',
+          slate: '#1B2B27',
+          card: '#FFFFFF',
+          border: 'rgba(27, 43, 39, 0.08)',
         },
-        alabaster: '#0A110F',
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
@@ -64,28 +65,22 @@ export default {
         mono: ['JetBrains Mono', 'Menlo', 'monospace'],
       },
       boxShadow: {
-        'glow': '0 0 30px -5px rgba(62, 217, 192, 0.3)',
-        'glow-teal': '0 0 35px -5px rgba(62, 217, 192, 0.35)',
-        'glow-porcelain': '0 0 30px -5px rgba(242, 233, 220, 0.2)',
-        'tactile-teal': 'inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 20px -2px rgba(62, 217, 192, 0.35)',
-        'tactile-dark': 'inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 16px -2px rgba(0, 0, 0, 0.6)',
-        'luxury': '0 20px 40px -15px rgba(0, 0, 0, 0.7)',
-        'luxury-dark': '0 25px 50px -12px rgba(0, 0, 0, 0.85)',
+        'spa': '0 10px 30px -10px rgba(27, 43, 39, 0.06), 0 20px 25px -5px rgba(27, 43, 39, 0.03)',
+        'spa-hover': '0 16px 40px -12px rgba(27, 43, 39, 0.1), 0 24px 30px -8px rgba(27, 43, 39, 0.05)',
+        'tactile-teal': '0 8px 20px -4px rgba(62, 142, 126, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+        'tactile-light': '0 4px 14px rgba(27, 43, 39, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+        'glow-mint': '0 0 40px 10px rgba(212, 239, 232, 0.6)',
+        'glow-blush': '0 0 40px 10px rgba(249, 235, 231, 0.5)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'shimmer': 'shimmer 2.5s infinite linear',
+        'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-8px)' },
+          '50%': { transform: 'translateY(-6px)' },
         },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' },
-        }
       }
     },
   },
