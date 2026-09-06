@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Calendar, Bot, AlertTriangle, ShieldCheck, Clock, CheckCircle2 } from 'lucide-react';
+import { Phone, Calendar, Bot, AlertCircle } from 'lucide-react';
 import { ClinicProfile } from '../../types/clinic';
 
 interface EmergencySectionProps {
@@ -21,33 +21,34 @@ export const EmergencySection: React.FC<EmergencySectionProps> = ({
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-900 to-luxury-slate text-white relative overflow-hidden">
-      {/* Red ambient urgency glow */}
+    <section className="py-20 bg-[#0A110F] text-[#F9FAF9] relative overflow-hidden border-t border-white/5">
+      {/* Soft ambient urgency glow */}
       <div className="absolute top-0 right-10 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="bg-rose-950/40 border border-rose-500/30 rounded-2xl sm:rounded-3xl p-5 sm:p-10 backdrop-blur-xl shadow-2xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="bg-[#0E1614] border border-rose-500/20 rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-2xl relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             {/* Left: Urgency Value Proposition */}
-            <div className="lg:col-span-7 space-y-3 sm:space-y-4">
-              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full bg-rose-500/20 border border-rose-400/30 text-rose-300 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
-                <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
+            <div className="lg:col-span-7 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/25 text-rose-300 text-xs font-medium">
+                <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
                 Guaranteed Same-Day Emergency Care
               </div>
 
-              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white tracking-tight leading-snug">
-                Have a Dental Emergency? We’re Here to Help.
+              <h2 className="text-2xl sm:text-4xl font-serif font-light text-[#F2E9DC] tracking-tight leading-snug">
+                Have an Urgent Dental Emergency? We’re Here to Help.
               </h2>
 
-              <p className="text-xs sm:text-base text-slate-300 leading-relaxed max-w-xl">
+              <p className="text-xs sm:text-base text-[#A8B8B4] leading-relaxed max-w-xl">
                 Acute dental pain, fractured crowns, or facial trauma cannot wait. Our clinicians prioritize rapid pain alleviation, digital diagnostics, and tooth preservation immediately.
               </p>
 
-              {/* Three Primary Actions: Full-width stacked on mobile, row on tablet/desktop */}
-              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3 pt-2">
+              {/* Three Primary Actions */}
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-2">
                 <a
                   href={`tel:${clinic.emergencyPhone}`}
-                  className="py-3 sm:py-3.5 px-5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm shadow-lg shadow-rose-600/30 flex items-center justify-center gap-2 transition-all w-full sm:w-auto text-center"
+                  className="py-3.5 px-5 rounded-xl bg-gradient-to-b from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-rose-950/40 border-t border-rose-400/30 flex items-center justify-center gap-2 transition-all w-full sm:w-auto text-center"
                 >
                   <Phone className="w-4 h-4 shrink-0" />
                   <span>Call Emergency Hotline: {clinic.emergencyPhone}</span>
@@ -55,32 +56,32 @@ export const EmergencySection: React.FC<EmergencySectionProps> = ({
 
                 <button
                   onClick={onOpenBooking}
-                  className="py-3 sm:py-3.5 px-5 rounded-xl bg-white hover:bg-slate-100 text-luxury-slate font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all w-full sm:w-auto text-center"
+                  className="btn-tactile-primary py-3.5 px-5 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 w-full sm:w-auto text-center"
                 >
-                  <Calendar className="w-4 h-4 text-brand-600 shrink-0" />
+                  <Calendar className="w-4 h-4 text-teal-950 shrink-0" />
                   <span>Request Emergency Slot Online</span>
                 </button>
 
                 <button
                   onClick={onOpenAi}
-                  className="py-3 sm:py-3.5 px-5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all w-full sm:w-auto text-center"
+                  className="btn-tactile-secondary py-3.5 px-5 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 w-full sm:w-auto text-center"
                 >
-                  <Bot className="w-4 h-4 text-brand-400 shrink-0" />
+                  <Bot className="w-4 h-4 text-teal-400 shrink-0" />
                   <span>Triage with AI Receptionist</span>
                 </button>
               </div>
             </div>
 
             {/* Right: Quick First-Aid Advice Guide */}
-            <div className="lg:col-span-5 bg-slate-900/80 rounded-2xl p-5 border border-slate-700/80 space-y-3 text-xs">
-              <span className="font-mono text-rose-400 font-bold uppercase tracking-wider block">
+            <div className="lg:col-span-5 bg-[#131F1C] rounded-2xl p-5 border border-white/10 space-y-3 text-xs">
+              <span className="font-mono text-rose-300/90 text-[11px] font-medium tracking-wider block">
                 Immediate First-Aid Protocol
               </span>
 
               {commonEmergencies.map((em, idx) => (
-                <div key={idx} className="p-3 bg-slate-950/60 rounded-xl border border-slate-800">
-                  <span className="font-semibold text-white block mb-0.5">{em.title}</span>
-                  <p className="text-slate-400 leading-relaxed text-[11px]">{em.advice}</p>
+                <div key={idx} className="p-3 bg-[#0A110F]/80 rounded-xl border border-white/5">
+                  <span className="font-medium text-[#F2E9DC] block mb-0.5">{em.title}</span>
+                  <p className="text-[#A8B8B4] leading-relaxed text-[11px]">{em.advice}</p>
                 </div>
               ))}
             </div>

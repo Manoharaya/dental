@@ -169,8 +169,8 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
     mainLight.castShadow = true;
     scene.add(mainLight);
 
-    const blueRim = new THREE.DirectionalLight(0x0ea5e9, 1.8);
-    blueRim.position.set(-6, 2, -4);
+    const blueRim = new THREE.DirectionalLight(0x3ed9c0, 2.0); // Mint-teal clinical rim
+    blueRim.position.set(-6, 3, -4);
     scene.add(blueRim);
 
     // Main 3D Dental Arch Group
@@ -427,15 +427,15 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
         </div>
 
         {/* Quick Tooth Selector Pills */}
-        <div className="flex items-center gap-1.5 bg-slate-800/80 p-1 sm:p-1.5 rounded-xl sm:rounded-2xl border border-slate-700 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-1.5 bg-[#131F1C]/90 p-1 sm:p-1.5 rounded-xl sm:rounded-2xl border border-white/10 overflow-x-auto no-scrollbar">
           {(['molar', 'premolar', 'canine', 'incisor'] as const).map((key) => (
             <button
               key={key}
               onClick={() => setSelectedToothKey(key)}
-              className={`px-2.5 sm:px-3 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-medium capitalize shrink-0 transition-all ${
+              className={`px-3 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-medium capitalize shrink-0 transition-all ${
                 selectedToothKey === key
-                  ? 'bg-brand-500 text-white shadow-glow'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-700/60'
+                  ? 'btn-tactile-primary text-[#07221C] font-semibold shadow-[0_0_15px_rgba(62,217,192,0.3)]'
+                  : 'text-[#A8B8B4] hover:text-[#F9FAF9] hover:bg-white/5'
               }`}
             >
               {key}
@@ -447,21 +447,21 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
       {/* Two Column Layout: 3D Arch Canvas + Diagnostic Intelligence Card */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
         {/* Left: 3D Canvas Area */}
-        <div className="lg:col-span-7 flex flex-col justify-between bg-slate-950/60 rounded-2xl border border-slate-800/80 p-3 sm:p-4 relative min-h-[360px] sm:min-h-[420px]">
+        <div className="lg:col-span-7 flex flex-col justify-between glass-clinical rounded-3xl border border-[#3ED9C0]/20 p-4 relative min-h-[380px] sm:min-h-[440px] shadow-2xl">
           {/* Top Canvas Badges: Layer Selectors */}
           <div className="flex flex-wrap items-center justify-between gap-2 z-10 mb-2">
-            <div className="flex items-center gap-1 bg-slate-900/90 backdrop-blur-md p-1 rounded-xl border border-slate-700/80 text-[11px] sm:text-xs">
-              <span className="text-slate-400 px-1.5 sm:px-2 py-0.5 flex items-center gap-1 font-medium">
-                <Layers className="w-3.5 h-3.5 text-brand-400" /> Layers:
+            <div className="flex items-center gap-1 bg-[#0E1614]/90 backdrop-blur-md p-1 rounded-xl border border-white/10 text-[11px] sm:text-xs">
+              <span className="text-[#A8B8B4] px-2 py-0.5 flex items-center gap-1 font-medium">
+                <Layers className="w-3.5 h-3.5 text-[#3ED9C0]" /> Layers:
               </span>
               {(['all', 'enamel', 'dentin', 'pulp'] as const).map((layer) => (
                 <button
                   key={layer}
                   onClick={() => setActiveLayer(layer)}
-                  className={`px-2 sm:px-2.5 py-1 rounded-lg text-[10px] sm:text-xs capitalize transition-colors ${
+                  className={`px-2.5 py-1 rounded-lg text-[10px] sm:text-xs capitalize transition-colors ${
                     activeLayer === layer
-                      ? 'bg-brand-500 text-white font-semibold'
-                      : 'text-slate-400 hover:text-slate-200'
+                      ? 'bg-[#3ED9C0] text-[#07221C] font-bold'
+                      : 'text-[#A8B8B4] hover:text-[#F9FAF9]'
                   }`}
                 >
                   {layer}
@@ -469,8 +469,8 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
               ))}
             </div>
 
-            <span className="text-[10px] sm:text-xs text-slate-400 bg-slate-900/80 px-2 sm:px-2.5 py-1 rounded-lg border border-slate-800 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-brand-400 animate-pulse" /> Tap any tooth to inspect
+            <span className="text-[10px] sm:text-xs text-[#D1DED9] bg-[#0E1614]/80 px-2.5 py-1 rounded-lg border border-white/10 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#3ED9C0] animate-pulse" /> Tap tooth to isolate
             </span>
           </div>
 
@@ -478,44 +478,44 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
           <div ref={mountRef} className="w-full h-64 sm:h-80 md:h-96 relative cursor-grab active:cursor-grabbing touch-none" />
 
           {/* Bottom Interactive Hint & Selected Tooth pill */}
-          <div className="flex items-center justify-between z-10 pt-2 border-t border-slate-800/80 text-xs text-slate-400">
+          <div className="flex items-center justify-between z-10 pt-2 border-t border-white/10 text-xs text-[#A8B8B4]">
             <span>✦ Click & drag to inspect 360°</span>
-            <span className="font-mono text-brand-400 font-semibold bg-brand-500/10 px-2.5 py-0.5 rounded-full border border-brand-500/20">
+            <span className="font-mono text-[#3ED9C0] font-semibold bg-[#182723] px-3 py-0.5 rounded-full border border-[#3ED9C0]/30">
               Selected: {selectedTooth.name} ({selectedTooth.number})
             </span>
           </div>
         </div>
 
         {/* Right: Clinical Anatomy & Diagnostic Detail Card */}
-        <div className="lg:col-span-5 flex flex-col justify-between bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/80 p-6">
+        <div className="lg:col-span-5 flex flex-col justify-between glass-clinical rounded-3xl border border-white/10 p-5 sm:p-7 shadow-2xl">
           <div>
             {/* Tooth Badge and Title */}
             <div className="flex items-start justify-between gap-2 mb-4">
               <div>
-                <span className="text-xs font-mono text-brand-400 uppercase tracking-widest font-semibold">
+                <span className="text-xs font-mono text-[#3ED9C0] uppercase tracking-widest font-semibold">
                   Dental Anatomy • {selectedTooth.number}
                 </span>
-                <h4 className="text-xl font-display font-bold text-white mt-0.5">
+                <h4 className="text-xl font-display font-bold text-[#F9FAF9] mt-0.5">
                   {selectedTooth.name}
                 </h4>
               </div>
-              <span className="px-2.5 py-1 rounded-full bg-slate-700 text-xs text-slate-300 font-medium capitalize">
+              <span className="px-2.5 py-1 rounded-full bg-[#182723] text-xs text-[#3ED9C0] border border-[#3ED9C0]/20 font-medium capitalize">
                 {selectedTooth.type}
               </span>
             </div>
 
-            <p className="text-sm text-slate-300 mb-5 bg-slate-900/50 p-3 rounded-xl border border-slate-800 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#D1DED9] mb-5 bg-[#0E1614]/80 p-3.5 rounded-xl border border-white/5 leading-relaxed">
               {selectedTooth.function}
             </p>
 
             {/* Diagnostic Tabs */}
-            <div className="flex items-center border-b border-slate-700 mb-4 text-xs font-medium">
+            <div className="flex items-center border-b border-white/10 mb-4 text-xs font-medium">
               <button
                 onClick={() => setActiveTab('anatomy')}
                 className={`pb-2.5 px-3 border-b-2 transition-colors flex items-center gap-1.5 ${
                   activeTab === 'anatomy'
-                    ? 'border-brand-400 text-brand-400 font-semibold'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                    ? 'border-[#3ED9C0] text-[#3ED9C0] font-semibold'
+                    : 'border-transparent text-[#A8B8B4] hover:text-[#F9FAF9]'
                 }`}
               >
                 <Layers className="w-3.5 h-3.5" />
@@ -526,18 +526,18 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
                 className={`pb-2.5 px-3 border-b-2 transition-colors flex items-center gap-1.5 ${
                   activeTab === 'issues'
                     ? 'border-amber-400 text-amber-400 font-semibold'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                    : 'border-transparent text-[#A8B8B4] hover:text-[#F9FAF9]'
                 }`}
               >
                 <AlertTriangle className="w-3.5 h-3.5" />
-                Common Pathologies
+                Pathologies
               </button>
               <button
                 onClick={() => setActiveTab('treatments')}
                 className={`pb-2.5 px-3 border-b-2 transition-colors flex items-center gap-1.5 ${
                   activeTab === 'treatments'
-                    ? 'border-emerald-400 text-emerald-400 font-semibold'
-                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                    ? 'border-[#3ED9C0] text-[#3ED9C0] font-semibold'
+                    : 'border-transparent text-[#A8B8B4] hover:text-[#F9FAF9]'
                 }`}
               >
                 <Activity className="w-3.5 h-3.5" />
@@ -547,53 +547,53 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
 
             {/* Tab 1: Tissue Anatomy */}
             {activeTab === 'anatomy' && (
-              <div className="space-y-3 text-xs">
-                <div className="p-2.5 rounded-xl bg-slate-900/40 border border-slate-800">
-                  <div className="flex items-center gap-1.5 font-semibold text-sky-300 mb-1">
-                    <span className="w-2 h-2 rounded-full bg-sky-400" />
+              <div className="space-y-2.5 text-xs">
+                <div className="p-3 rounded-xl bg-[#0E1614]/80 border border-white/5">
+                  <div className="flex items-center gap-1.5 font-semibold text-[#7CEBD8] mb-1">
+                    <span className="w-2 h-2 rounded-full bg-[#3ED9C0]" />
                     Enamel Layer (Outer)
                   </div>
-                  <p className="text-slate-400 leading-normal">{selectedTooth.anatomy.enamel}</p>
+                  <p className="text-[#A8B8B4] leading-relaxed">{selectedTooth.anatomy.enamel}</p>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-slate-900/40 border border-slate-800">
-                  <div className="flex items-center gap-1.5 font-semibold text-yellow-300 mb-1">
-                    <span className="w-2 h-2 rounded-full bg-yellow-400" />
+                <div className="p-3 rounded-xl bg-[#0E1614]/80 border border-white/5">
+                  <div className="flex items-center gap-1.5 font-semibold text-[#F2E9DC] mb-1">
+                    <span className="w-2 h-2 rounded-full bg-[#F2E9DC]" />
                     Dentin Layer (Middle)
                   </div>
-                  <p className="text-slate-400 leading-normal">{selectedTooth.anatomy.dentin}</p>
+                  <p className="text-[#A8B8B4] leading-relaxed">{selectedTooth.anatomy.dentin}</p>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-slate-900/40 border border-slate-800">
+                <div className="p-3 rounded-xl bg-[#0E1614]/80 border border-white/5">
                   <div className="flex items-center gap-1.5 font-semibold text-rose-400 mb-1">
                     <span className="w-2 h-2 rounded-full bg-rose-500" />
                     Pulp & Nerve Chamber (Inner)
                   </div>
-                  <p className="text-slate-400 leading-normal">{selectedTooth.anatomy.pulp}</p>
+                  <p className="text-[#A8B8B4] leading-relaxed">{selectedTooth.anatomy.pulp}</p>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-slate-900/40 border border-slate-800">
-                  <div className="flex items-center gap-1.5 font-semibold text-slate-300 mb-1">
+                <div className="p-3 rounded-xl bg-[#0E1614]/80 border border-white/5">
+                  <div className="flex items-center gap-1.5 font-semibold text-[#D1DED9] mb-1">
                     <span className="w-2 h-2 rounded-full bg-slate-400" />
                     Root & Alveolar Bone
                   </div>
-                  <p className="text-slate-400 leading-normal">{selectedTooth.anatomy.root}</p>
+                  <p className="text-[#A8B8B4] leading-relaxed">{selectedTooth.anatomy.root}</p>
                 </div>
               </div>
             )}
 
             {/* Tab 2: Common Pathologies */}
             {activeTab === 'issues' && (
-              <div className="space-y-3 text-xs">
+              <div className="space-y-2.5 text-xs">
                 {selectedTooth.commonIssues.map((issue, idx) => (
-                  <div key={idx} className="p-3 rounded-xl bg-slate-900/60 border border-amber-500/20">
+                  <div key={idx} className="p-3 rounded-xl bg-[#0E1614]/80 border border-amber-500/20">
                     <div className="flex items-center justify-between font-semibold text-amber-300 mb-1">
                       <span>{issue.title}</span>
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">
                         {issue.risk}
                       </span>
                     </div>
-                    <p className="text-slate-300 mb-1">Symptoms: {issue.symptom}</p>
+                    <p className="text-[#D1DED9] mb-1">Symptoms: {issue.symptom}</p>
                   </div>
                 ))}
               </div>
@@ -601,17 +601,17 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
 
             {/* Tab 3: Clinical Solutions */}
             {activeTab === 'treatments' && (
-              <div className="space-y-3 text-xs">
+              <div className="space-y-2.5 text-xs">
                 {selectedTooth.treatments.map((tr, idx) => (
-                  <div key={idx} className="p-3 rounded-xl bg-slate-900/60 border border-emerald-500/20">
-                    <div className="flex items-center justify-between font-semibold text-emerald-300 mb-1">
+                  <div key={idx} className="p-3 rounded-xl bg-[#0E1614]/80 border border-[#3ED9C0]/20">
+                    <div className="flex items-center justify-between font-semibold text-[#3ED9C0] mb-1">
                       <span className="flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#3ED9C0]" />
                         {tr.name}
                       </span>
-                      <span className="text-[10px] text-slate-400">{tr.type}</span>
+                      <span className="text-[10px] text-[#A8B8B4]">{tr.type}</span>
                     </div>
-                    <p className="text-slate-300 leading-normal">{tr.recommendation}</p>
+                    <p className="text-[#D1DED9] leading-relaxed">{tr.recommendation}</p>
                   </div>
                 ))}
               </div>
@@ -619,18 +619,18 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
           </div>
 
           {/* Action CTA & Medical Disclaimer */}
-          <div className="mt-6 pt-4 border-t border-slate-700/80 space-y-3">
+          <div className="mt-6 pt-4 border-t border-white/10 space-y-3">
             <button
               onClick={onBookConsultation}
-              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-brand-500 to-cyan-500 text-white font-semibold text-sm hover:from-brand-600 hover:to-cyan-600 transition-all shadow-glow flex items-center justify-center gap-2 group"
+              className="btn-tactile-primary w-full py-3.5 px-4 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 group"
             >
-              <Stethoscope className="w-4 h-4" />
-              Book Consultation for {selectedTooth.name}
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              <Stethoscope className="w-4 h-4 text-[#07221C]" />
+              <span>Reserve Consultation for {selectedTooth.name}</span>
+              <ChevronRight className="w-4 h-4 text-[#07221C] group-hover:translate-x-0.5 transition-transform" />
             </button>
 
-            <p className="text-[11px] text-slate-500 text-center leading-relaxed">
-              ✦ <span className="font-semibold text-slate-400">Educational Disclaimer:</span> This interactive 3D model is designed for patient education and does not constitute formal clinical diagnosis.
+            <p className="text-[11px] text-[#A8B8B4] text-center leading-relaxed">
+              ✦ <span className="font-semibold text-[#D1DED9]">Educational Disclaimer:</span> Interactive biological visualization designed for clinical orientation.
             </p>
           </div>
         </div>

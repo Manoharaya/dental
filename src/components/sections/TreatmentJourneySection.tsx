@@ -54,19 +54,19 @@ export const TreatmentJourneySection: React.FC<TreatmentJourneySectionProps> = (
   ];
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-24 bg-[#0A110F] relative overflow-hidden border-t border-white/[0.06]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Header */}
+        {/* Header: Clean Editorial Style */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold uppercase tracking-wider mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            Seamless Patient Journey
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#131F1C] border border-[#3ED9C0]/25 text-[#D1DED9] text-xs font-medium mb-3 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3ED9C0]" />
+            Care Protocol & Roadmap
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-luxury-slate tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold text-[#F9FAF9] tracking-tight">
             How Your Smile Transformation Unfolds
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-slate-600">
-            From your very first greeting to long-term preventive vitality, every stage is orchestrated for supreme serenity.
+          <p className="mt-3 text-base sm:text-lg text-[#A8B8B4]">
+            From your private introductory consultation to lifetime aftercare, every milestone is calibrated for serenity.
           </p>
         </div>
 
@@ -79,25 +79,25 @@ export const TreatmentJourneySection: React.FC<TreatmentJourneySectionProps> = (
               <div
                 key={item.step}
                 onClick={() => setActiveStep(stepNum)}
-                className={`flex-shrink-0 w-[210px] sm:w-[240px] md:w-auto snap-center p-3.5 sm:p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between select-none ${
+                className={`flex-shrink-0 w-[210px] sm:w-[240px] md:w-auto snap-center p-3.5 sm:p-5 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between select-none ${
                   isCurrent
-                    ? 'border-brand-500 bg-brand-50/50 shadow-luxury ring-2 ring-brand-400/20'
-                    : 'border-slate-200 bg-slate-50 hover:bg-white hover:border-slate-300'
+                    ? 'border-[#3ED9C0]/60 bg-[#182723] shadow-[0_0_25px_rgba(62,217,192,0.18)]'
+                    : 'border-white/[0.08] bg-[#131F1C]/70 hover:bg-[#131F1C] hover:border-white/20'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2 sm:mb-3">
-                  <span className={`font-mono text-[11px] sm:text-xs font-bold ${isCurrent ? 'text-brand-600' : 'text-slate-400'}`}>
-                    STEP {item.step}
+                  <span className={`font-mono text-[11px] sm:text-xs font-semibold ${isCurrent ? 'text-[#3ED9C0]' : 'text-[#A8B8B4]'}`}>
+                    PHASE {item.step}
                   </span>
                   <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center ${
-                    isCurrent ? 'bg-white shadow-sm' : 'bg-slate-200/60'
+                    isCurrent ? 'bg-[#131F1C] text-[#3ED9C0] border border-[#3ED9C0]/30 shadow-sm' : 'bg-[#0E1614] text-[#A8B8B4]'
                   }`}>
                     {item.icon}
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-xs sm:text-sm text-slate-900 leading-snug">{item.title}</h4>
-                  <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">{item.tagline}</p>
+                  <h4 className="font-semibold text-xs sm:text-sm text-[#F9FAF9] leading-snug">{item.title}</h4>
+                  <p className="text-[11px] text-[#A8B8B4] mt-1 line-clamp-2">{item.tagline}</p>
                 </div>
               </div>
             );
@@ -105,38 +105,38 @@ export const TreatmentJourneySection: React.FC<TreatmentJourneySectionProps> = (
         </div>
 
         {/* Mobile Swipe Guidance Note */}
-        <div className="md:hidden flex items-center justify-between text-[11px] text-slate-400 -mt-3 mb-5 px-1">
-          <span>Swipe horizontally to view all 5 steps</span>
-          <span className="font-mono text-brand-600 font-bold">Step {activeStep} of 5 active</span>
+        <div className="md:hidden flex items-center justify-between text-[11px] text-[#A8B8B4] -mt-3 mb-5 px-1">
+          <span>Swipe horizontally to view all 5 phases</span>
+          <span className="font-mono text-[#3ED9C0] font-semibold">Phase {activeStep} of 5 active</span>
         </div>
 
         {/* Expanded Active Step Detail View Card */}
         {(() => {
           const current = journeySteps[activeStep - 1];
           return (
-            <div className="bg-slate-900 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-luxury-dark border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div className="glass-clinical text-white rounded-2xl sm:rounded-3xl p-5 sm:p-10 border border-[#3ED9C0]/20 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
               <div className="lg:col-span-8 space-y-3 sm:space-y-4">
-                <div className="flex items-center gap-2 text-xs font-mono text-brand-400 font-bold uppercase tracking-widest">
+                <div className="flex items-center gap-2 text-xs font-mono text-[#3ED9C0] font-semibold uppercase tracking-widest">
                   <span>Phase {current.step} of 05</span>
                   <span>•</span>
                   <span>{current.tagline}</span>
                 </div>
-                <h3 className="text-xl sm:text-3xl font-display font-bold text-white">
+                <h3 className="text-xl sm:text-3xl font-display font-semibold text-[#F9FAF9]">
                   {current.title}
                 </h3>
-                <p className="text-xs sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+                <p className="text-xs sm:text-base text-[#D1DED9] leading-relaxed max-w-2xl font-normal">
                   {current.description}
                 </p>
 
                 <div className="pt-2 sm:pt-3">
-                  <h5 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                  <h5 className="text-[11px] sm:text-xs font-mono uppercase tracking-wider text-[#A8B8B4] mb-2">
                     Included in this stage:
                   </h5>
                   <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {current.deliverables.map((d, i) => (
                       <span
                         key={i}
-                        className="text-[11px] sm:text-xs bg-slate-800 text-slate-200 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-slate-700"
+                        className="text-[11px] sm:text-xs bg-[#0E1614]/90 text-[#F2E9DC] px-3 py-1.5 rounded-xl border border-white/10"
                       >
                         ✦ {d}
                       </span>
@@ -148,10 +148,10 @@ export const TreatmentJourneySection: React.FC<TreatmentJourneySectionProps> = (
               <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-center pt-2 lg:pt-0">
                 <button
                   onClick={onBookConsultation}
-                  className="w-full sm:w-auto py-3 sm:py-3.5 px-6 rounded-xl bg-gradient-to-r from-brand-500 to-cyan-500 hover:from-brand-600 hover:to-cyan-600 text-white font-semibold text-xs sm:text-sm shadow-glow flex items-center justify-center gap-2 transition-all"
+                  className="btn-tactile-primary w-full sm:w-auto py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-xs sm:text-sm font-bold group"
                 >
-                  <span>Begin Step 01: Book Consultation</span>
-                  <ChevronRight className="w-4 h-4" />
+                  <span>Begin Phase 01: Reserve Consultation</span>
+                  <ChevronRight className="w-4 h-4 text-[#07221C] group-hover:translate-x-0.5 transition-transform" />
                 </button>
               </div>
             </div>

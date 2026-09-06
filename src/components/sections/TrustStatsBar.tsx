@@ -15,24 +15,27 @@ export const TrustStatsBar: React.FC<TrustStatsBarProps> = ({ clinic }) => {
   ];
 
   return (
-    <div className="border-y border-slate-200/80 bg-white/70 backdrop-blur-sm relative z-10 py-6 sm:py-8">
+    <div className="border-y border-white/[0.07] bg-[#0E1614] relative z-10 py-6 sm:py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:gap-4 lg:gap-0 lg:divide-x divide-white/[0.07]">
           {clinic.trustStats.map((stat, idx) => (
             <div
               key={idx}
-              className="flex flex-col items-center text-center p-3 sm:p-4 rounded-2xl bg-slate-50/70 border border-slate-200/60 shadow-sm"
+              className="flex flex-col items-start px-4 py-4 sm:px-6 sm:py-2 text-left"
             >
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-white border border-slate-200/80 flex items-center justify-center mb-2 shadow-sm">
-                {icons[idx % icons.length]}
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#3ED9C0]" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#3ED9C0]">
+                  Clinical Metric 0{idx + 1}
+                </span>
               </div>
-              <div className="text-xl sm:text-2xl lg:text-3xl font-display font-extrabold text-luxury-slate tracking-tight">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-mono font-medium text-[#F9FAF9] tracking-tight">
                 {stat.value}
               </div>
-              <div className="text-[10px] sm:text-xs font-bold text-slate-700 mt-0.5 uppercase tracking-wide">
+              <div className="text-xs font-medium text-[#F2E9DC] mt-1 tracking-wide">
                 {stat.label}
               </div>
-              <div className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">
+              <div className="text-[11px] text-[#A8B8B4] mt-0.5">
                 {stat.subtext}
               </div>
             </div>

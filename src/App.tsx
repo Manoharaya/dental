@@ -37,7 +37,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-alabaster text-luxury-slate font-sans selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#0A110F] text-[#F9FAF9] font-sans selection:bg-[#3ED9C0] selection:text-[#06201B]">
 
       {/* 2. Sticky Glassmorphic Navbar */}
       <Navbar
@@ -64,7 +64,8 @@ export function App() {
         />
 
         {/* Signature Interactive 3D Dental Arch & Anatomy Explorer */}
-        <section id="3d-explorer" className="py-24 bg-luxury-slate text-white relative">
+        {/* Signature Interactive 3D Dental Arch & Anatomy Explorer */}
+        <section id="3d-explorer" className="py-24 bg-[#0A110F] text-[#F9FAF9] relative border-t border-white/[0.06]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <DentalExplorer3D
               onSelectTreatment={(name) => handleOpenBooking()}
@@ -146,20 +147,20 @@ export function App() {
       <div className="hidden lg:block fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setIsAiOpen(true)}
-          className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-luxury-slate/95 hover:bg-black text-white shadow-2xl border border-slate-700/80 backdrop-blur-md transition-all hover:scale-105 group"
+          className="glass-clinical hover:border-[#3ED9C0]/50 flex items-center gap-3 px-5 py-3.5 rounded-2xl text-[#F9FAF9] shadow-[0_15px_35px_rgba(0,0,0,0.8)] backdrop-blur-2xl transition-all hover:-translate-y-1 group"
         >
           <div className="relative">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-500 to-cyan-400 flex items-center justify-center text-white shadow-glow">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#3ED9C0] to-[#1E8D7B] flex items-center justify-center text-[#07221C] shadow-[0_0_15px_rgba(62,217,192,0.4)] font-bold">
               <Bot className="w-4 h-4" />
             </div>
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#3ED9C0] animate-ping" />
           </div>
           <div className="text-left">
-            <span className="text-xs font-bold block flex items-center gap-1.5">
-              Ask AI Dental Assistant
-              <Sparkles className="w-3 h-3 text-brand-400" />
+            <span className="text-xs font-semibold block flex items-center gap-1.5 text-[#F9FAF9]">
+              AI Clinical Concierge
+              <Sparkles className="w-3 h-3 text-[#3ED9C0]" />
             </span>
-            <span className="text-[10px] text-slate-400 block -mt-0.5">Online • Instant Answers</span>
+            <span className="text-[10px] text-[#A8B8B4] block -mt-0.5">Instant Medical Triage</span>
           </div>
         </button>
       </div>

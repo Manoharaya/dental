@@ -62,22 +62,22 @@ export const Tooth3DViewer: React.FC<Tooth3DViewerProps> = ({
     renderer.shadowMap.type = THREE.PCFShadowMap;
     container.appendChild(renderer.domElement);
 
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+    // Lights: Precision studio lighting with mint-teal and porcelain rim
+    const ambientLight = new THREE.AmbientLight(0xd4eae5, 0.75);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight(0xfff8f0, 2.2);
+    const keyLight = new THREE.DirectionalLight(0xfff6ec, 2.4); // Warm porcelain key
     keyLight.position.set(4, 6, 5);
     keyLight.castShadow = true;
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0x0ea5e9, 1.4); // Subtle cyan clinical fill
-    fillLight.position.set(-4, 2, -3);
+    const fillLight = new THREE.DirectionalLight(0x3ed9c0, 1.8); // Precision mint-teal rim
+    fillLight.position.set(-4, 3, -3);
     scene.add(fillLight);
 
-    const rimLight = new THREE.PointLight(0xffffff, 1.8, 10);
-    rimLight.position.set(0, 4, -4);
-    scene.add(rimLight);
+    const backRimLight = new THREE.PointLight(0x52e0c7, 2.0, 12);
+    backRimLight.position.set(0, 4, -4);
+    scene.add(backRimLight);
 
     // Group for all tooth parts
     const toothGroup = new THREE.Group();
@@ -100,24 +100,24 @@ export const Tooth3DViewer: React.FC<Tooth3DViewerProps> = ({
         crownPos.setY(i, y + cuspBump);
       }
       // Natural barrel curvature
-      const r = Math.sqrt(x * x + z * z);
       const bulge = Math.sin((y + 0.6) * 2.2) * 0.12;
       crownPos.setX(i, x * (1 + bulge));
       crownPos.setZ(i, z * (1 + bulge));
     }
     crownGeo.computeVertexNormals();
 
-    // Natural Enamel Material
+    // Natural Enamel Material - Translucent Porcelain with Mint-Teal Refraction
     const crownMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xfbf9f5,
-      emissive: 0x111111,
-      roughness: 0.18,
-      metalness: 0.05,
-      clearcoat: 0.95,
-      clearcoatRoughness: 0.12,
-      transmission: 0.25,
-      thickness: 0.8,
-      reflectivity: 0.9,
+      color: 0xf6f3ed, // Warm porcelain
+      emissive: 0x051a17, // Subtle deep teal internal resonance
+      roughness: 0.12,
+      metalness: 0.04,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.08,
+      transmission: 0.32,
+      thickness: 0.9,
+      reflectivity: 0.95,
+      ior: 1.52, // Index of refraction of natural tooth enamel
     });
 
     const crownMesh = new THREE.Mesh(crownGeo, crownMaterial);
@@ -127,12 +127,16 @@ export const Tooth3DViewer: React.FC<Tooth3DViewerProps> = ({
     toothGroup.add(crownMesh);
     crownMeshRef.current = crownMesh;
 
-    // 2. Restored Ceramic / Gold Inlay Crown Cap
-    const capGeo = new THREE.CylinderGeometry(1.08, 0.95, 0.7, 32, 8);
-    const capMaterial = new THREE.MeshStandardMaterial({
-      color: 0xd4af37, // Gold/Champagne ceramic restoration
-      metalness: 0.85,
-      roughness: 0.25,
+    // 2. Restored Ceramic Crown Cap (High-translucency Zirconia / Lithium Disilicate)
+    const capGeo = new THREE.CylinderGeometry(1.08, 0.95, 0.72, 32, 8);
+    const capMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xfbf9f5,
+      emissive: 0x16463e,
+      roughness: 0.08,
+      metalness: 0.1,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.05,
+      transmission: 0.28,
       visible: false,
     });
     const capMesh = new THREE.Mesh(capGeo, capMaterial);
@@ -146,8 +150,8 @@ export const Tooth3DViewer: React.FC<Tooth3DViewerProps> = ({
     toothGroup.add(rootsGroup);
 
     const rootMaterial = new THREE.MeshStandardMaterial({
-      color: 0xf3ede2,
-      roughness: 0.45,
+      color: 0xeae1d4,
+      roughness: 0.42,
       metalness: 0.02,
     });
 
@@ -176,8 +180,9 @@ export const Tooth3DViewer: React.FC<Tooth3DViewerProps> = ({
     // 4. Decay pathology spot (Darkened lesion in occlusal fissure)
     const decayGeo = new THREE.SphereGeometry(0.32, 16, 16);
     const decayMat = new THREE.MeshStandardMaterial({
-      color: 0x3d1c06,
-      roughness: 0.9,
+      color: 0x2b1509,
+      emissive: 0x3d1700,
+      roughness: 0.88,
       visible: false,
     });
     const decayMesh = new THREE.Mesh(decayGeo, decayMat);
@@ -246,13 +251,13 @@ export const Tooth3DViewer: React.FC<Tooth3DViewerProps> = ({
 
       // Gentle auto-spin when not actively dragging
       if (!isDragging) {
-        targetRotationY += 0.008;
+        targetRotationY += 0.007;
       }
 
-      // Smooth damping interpolation
-      toothGroup.rotation.y += (targetRotationY + mouseX * 0.3 - toothGroup.rotation.y) * 0.08;
-      toothGroup.rotation.x += (targetRotationX + mouseY * 0.2 - toothGroup.rotation.x) * 0.08;
-      toothGroup.position.y = 0.3 + Math.sin(elapsedTime * 1.5) * 0.06; // Floating motion
+      // Smooth damping interpolation with cursor parallax
+      toothGroup.rotation.y += (targetRotationY + mouseX * 0.25 - toothGroup.rotation.y) * 0.07;
+      toothGroup.rotation.x += (targetRotationX + mouseY * 0.18 - toothGroup.rotation.x) * 0.07;
+      toothGroup.position.y = 0.3 + Math.sin(elapsedTime * 1.4) * 0.05; // Gentle floating breath
 
       renderer.render(scene, camera);
     };
@@ -299,28 +304,32 @@ export const Tooth3DViewer: React.FC<Tooth3DViewerProps> = ({
     const crownMat = crown.material as THREE.MeshPhysicalMaterial;
 
     if (toothState === 'healthy') {
-      crownMat.color.setHex(0xfbf9f5);
-      crownMat.roughness = 0.18;
-      crownMat.clearcoat = 0.95;
-      crownMat.transmission = 0.25;
+      crownMat.color.setHex(0xf6f3ed);
+      crownMat.emissive.setHex(0x051a17);
+      crownMat.roughness = 0.12;
+      crownMat.clearcoat = 1.0;
+      crownMat.transmission = 0.32;
       if (decay) decay.visible = false;
       if (cap) cap.visible = false;
     } else if (toothState === 'decay') {
-      crownMat.color.setHex(0xd6cfc4);
-      crownMat.roughness = 0.6;
+      crownMat.color.setHex(0xc5bcaf);
+      crownMat.emissive.setHex(0x1a0d04);
+      crownMat.roughness = 0.55;
       crownMat.clearcoat = 0.2;
       crownMat.transmission = 0.05;
       if (decay) decay.visible = true;
       if (cap) cap.visible = false;
     } else if (toothState === 'restored') {
-      crownMat.color.setHex(0xf8fafc);
-      crownMat.roughness = 0.15;
+      crownMat.color.setHex(0xfbf9f5);
+      crownMat.emissive.setHex(0x0c3029);
+      crownMat.roughness = 0.08;
       crownMat.clearcoat = 1.0;
-      crownMat.transmission = 0.3;
+      crownMat.transmission = 0.36;
       if (decay) decay.visible = false;
       if (cap) {
         cap.visible = true;
-        (cap.material as THREE.MeshStandardMaterial).color.setHex(0x0ea5e9); // Modern high-tech ceramic or gold
+        (cap.material as THREE.MeshPhysicalMaterial).color.setHex(0xf8fafc);
+        (cap.material as THREE.MeshPhysicalMaterial).emissive.setHex(0x1e6155);
       }
     }
   }, [toothState]);
@@ -337,69 +346,70 @@ export const Tooth3DViewer: React.FC<Tooth3DViewerProps> = ({
           ref={containerRef}
           className="w-full h-64 sm:h-80 md:h-[390px] cursor-grab active:cursor-grabbing tooth-canvas-wrapper flex items-center justify-center relative"
         >
-          {/* Subtle 3D Depth Rings & Clinical Grid */}
-          <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-30">
-            <div className="w-48 sm:w-64 h-48 sm:h-64 border border-brand-300/40 rounded-full animate-pulse-ring" />
-            <div className="w-36 sm:w-48 h-36 sm:h-48 border border-brand-200/50 rounded-full absolute" />
+          {/* Subtle Ambient Radial Glow & Architectural Depth Rings */}
+          <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-40">
+            <div className="w-52 sm:w-72 h-52 sm:h-72 border border-[#3ED9C0]/20 rounded-full animate-pulse-ring" />
+            <div className="w-36 sm:w-52 h-36 sm:h-52 border border-[#F2E9DC]/15 rounded-full absolute" />
           </div>
 
           {/* Interactive Hint */}
           <div
-            className={`absolute bottom-2 bg-white/85 backdrop-blur-md px-2.5 py-1 rounded-full border border-slate-200/80 text-[10px] sm:text-xs text-slate-600 shadow-sm transition-opacity duration-300 pointer-events-none ${
+            className={`absolute bottom-2 bg-[#0E1614]/85 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[10px] sm:text-xs text-[#A8B8B4] shadow-lg transition-opacity duration-300 pointer-events-none flex items-center gap-1.5 ${
               isHovered ? 'opacity-100' : 'opacity-70'
             }`}
           >
-            ✦ Click & drag to rotate in 3D
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3ED9C0] animate-ping" />
+            <span>Interactive 3D model • Drag to inspect</span>
           </div>
         </div>
       ) : (
         /* Graceful Fallback Illustration */
-        <div className="w-full h-64 sm:h-80 flex flex-col items-center justify-center bg-slate-50 rounded-3xl border border-slate-200 p-6 text-center">
-          <div className="w-20 sm:w-28 h-20 sm:h-28 bg-brand-50 rounded-full flex items-center justify-center text-brand-500 mb-3 shadow-glow">
+        <div className="w-full h-64 sm:h-80 flex flex-col items-center justify-center bg-[#131F1C] rounded-3xl border border-white/10 p-6 text-center">
+          <div className="w-20 sm:w-28 h-20 sm:h-28 bg-[#182723] rounded-full flex items-center justify-center text-[#3ED9C0] mb-3 shadow-[0_0_25px_rgba(62,217,192,0.25)]">
             <Sparkles className="w-8 sm:w-12 h-8 sm:h-12" />
           </div>
-          <h4 className="font-display font-semibold text-slate-800 text-sm sm:text-lg">3D Anatomical Tooth Model</h4>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-xs mt-1">WebGL is disabled or unsupported on this device. Viewing clinical schematic.</p>
+          <h4 className="font-display font-semibold text-[#F9FAF9] text-sm sm:text-lg">3D Anatomical Tooth Model</h4>
+          <p className="text-xs sm:text-sm text-[#A8B8B4] max-w-xs mt-1">WebGL is disabled or unsupported on this device. Viewing clinical schematic.</p>
         </div>
       )}
 
       {/* Interactive State Toggle Controls */}
       {showControls && (
-        <div className="mt-2 flex flex-wrap justify-center items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-white/90 backdrop-blur-md rounded-xl sm:rounded-2xl border border-slate-200/90 shadow-luxury max-w-full">
+        <div className="mt-2 flex flex-wrap justify-center items-center gap-1 sm:gap-1.5 p-1.5 bg-[#131F1C]/90 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.6)] max-w-full">
           <button
             onClick={() => setToothState('healthy')}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold transition-all ${
               toothState === 'healthy'
-                ? 'bg-brand-500 text-white shadow-glow'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-gradient-to-r from-[#4AE0C7] to-[#2BB9A2] text-[#07221C] shadow-[0_0_20px_rgba(62,217,192,0.35)]'
+                : 'text-[#A8B8B4] hover:text-[#F9FAF9] hover:bg-white/5'
             }`}
           >
-            <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            Healthy Enamel
+            <ShieldCheck className="w-3.5 h-3.5" />
+            Natural Enamel
           </button>
 
           <button
             onClick={() => setToothState('decay')}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold transition-all ${
               toothState === 'decay'
-                ? 'bg-amber-600 text-white shadow-md'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-gradient-to-r from-amber-500 to-amber-700 text-white shadow-lg'
+                : 'text-[#A8B8B4] hover:text-[#F9FAF9] hover:bg-white/5'
             }`}
           >
-            <AlertCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            Caries / Decay
+            <AlertCircle className="w-3.5 h-3.5" />
+            Caries / Defect
           </button>
 
           <button
             onClick={() => setToothState('restored')}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold transition-all ${
               toothState === 'restored'
-                ? 'bg-emerald-600 text-white shadow-md'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                ? 'bg-gradient-to-r from-[#2BB9A2] to-emerald-600 text-[#07221C] font-bold shadow-[0_0_20px_rgba(62,217,192,0.35)]'
+                : 'text-[#A8B8B4] hover:text-[#F9FAF9] hover:bg-white/5'
             }`}
           >
-            <RefreshCw className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            Restored Crown
+            <RefreshCw className="w-3.5 h-3.5" />
+            Ceramic Crown
           </button>
         </div>
       )}

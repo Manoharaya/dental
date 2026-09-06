@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { BEFORE_AFTER_CASES } from '../../config/clinicData';
-import { Sparkles, ArrowLeftRight, CheckCircle2, User, Clock, Stethoscope } from 'lucide-react';
+import { Sparkles, ArrowLeftRight, CheckCircle2, User, Clock, Stethoscope, ChevronRight } from 'lucide-react';
 
 interface BeforeAfterSectionProps {
   onBookConsultation: () => void;
@@ -37,23 +37,22 @@ export const BeforeAfterSection: React.FC<BeforeAfterSectionProps> = ({ onBookCo
   };
 
   return (
-    <section id="gallery" className="py-24 bg-white relative overflow-hidden">
-      {/* Decorative luxury gradient ambient */}
-      <div className="absolute top-1/2 left-0 w-72 h-72 bg-brand-50 rounded-full blur-3xl -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-luxury-champagne rounded-full blur-3xl pointer-events-none" />
+    <section id="gallery" className="py-24 bg-[#0A110F] relative overflow-hidden border-t border-white/[0.06]">
+      {/* Background ambient radial glow */}
+      <div className="absolute top-1/3 right-0 w-96 h-96 bg-[#3ED9C0]/06 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Header Section */}
+        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-600 text-xs font-semibold uppercase tracking-wider mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            Clinical Excellence Showcase
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#131F1C] border border-[#3ED9C0]/25 text-[#D1DED9] text-xs font-medium mb-3 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3ED9C0]" />
+            Clinical Evidence & Case Logs
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-luxury-slate tracking-tight">
-            Real Results. Real Confidence.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold text-[#F9FAF9] tracking-tight">
+            Documented Outcomes. Restored Confidence.
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-slate-600">
-            Drag the interactive slider to reveal how our minimally invasive artistry and 3D precision transform natural smiles.
+          <p className="mt-3 text-base sm:text-lg text-[#A8B8B4]">
+            Drag the interactive divider to inspect how biomimetic ceramic artistry and sub-millimeter diagnostics transform smiles.
           </p>
         </div>
 
@@ -66,10 +65,10 @@ export const BeforeAfterSection: React.FC<BeforeAfterSectionProps> = ({ onBookCo
                 setSelectedCaseId(item.id);
                 setSliderPos(50);
               }}
-              className={`whitespace-nowrap shrink-0 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+              className={`whitespace-nowrap shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                 selectedCaseId === item.id
-                  ? 'bg-luxury-slate text-white shadow-luxury'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
+                  ? 'btn-tactile-primary text-[#07221C] shadow-[0_0_20px_rgba(62,217,192,0.3)]'
+                  : 'bg-[#131F1C]/80 border border-white/10 text-[#A8B8B4] hover:text-[#F9FAF9] hover:border-[#3ED9C0]/30'
               }`}
             >
               {item.treatmentType}
@@ -87,7 +86,7 @@ export const BeforeAfterSection: React.FC<BeforeAfterSectionProps> = ({ onBookCo
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               onPointerCancel={handlePointerUp}
-              className="relative w-full h-64 sm:h-[400px] md:h-[460px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl select-none cursor-ew-resize border border-slate-200 group touch-none"
+              className="relative w-full h-64 sm:h-[400px] md:h-[460px] rounded-3xl overflow-hidden shadow-2xl select-none cursor-ew-resize border border-white/10 group touch-none bg-black"
             >
               {/* After Image (Background full layer) */}
               <img
@@ -110,83 +109,87 @@ export const BeforeAfterSection: React.FC<BeforeAfterSectionProps> = ({ onBookCo
               </div>
 
               {/* Badges: Before and After */}
-              <div className="absolute top-3 left-3 z-10 bg-black/60 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/20 pointer-events-none">
-                Before
+              <div className="absolute top-3 left-3 z-10 bg-[#0E1614]/80 backdrop-blur-md text-[#F2E9DC] text-[10px] sm:text-xs font-mono font-medium px-3 py-1.5 rounded-full border border-white/15 pointer-events-none">
+                Pre-Treatment
               </div>
-              <div className="absolute top-3 right-3 z-10 bg-brand-500/80 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/20 pointer-events-none shadow-glow">
-                Restored (After)
+              <div className="absolute top-3 right-3 z-10 bg-[#182723]/90 backdrop-blur-md text-[#3ED9C0] text-[10px] sm:text-xs font-mono font-semibold px-3 py-1.5 rounded-full border border-[#3ED9C0]/30 pointer-events-none shadow-[0_0_15px_rgba(62,217,192,0.25)]">
+                Restored Result
               </div>
 
               {/* Draggable Divider Line & Handle */}
               <div
-                className="absolute top-0 bottom-0 z-20 w-0.5 bg-white shadow-[0_0_12px_rgba(0,0,0,0.4)] pointer-events-none"
+                className="absolute top-0 bottom-0 z-20 w-0.5 bg-white/90 shadow-[0_0_15px_rgba(0,0,0,0.8)] pointer-events-none"
                 style={{ left: `${sliderPos}%` }}
               >
-                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white text-luxury-slate shadow-xl border-2 border-brand-500 flex items-center justify-center transition-transform group-active:scale-110">
-                  <ArrowLeftRight className="w-4 h-4 sm:w-5 sm:h-5 text-brand-600" />
+                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#131F1C] text-[#3ED9C0] shadow-2xl border-2 border-[#3ED9C0] flex items-center justify-center transition-transform group-active:scale-110">
+                  <ArrowLeftRight className="w-4 h-4 sm:w-5 sm:h-5 text-[#3ED9C0]" />
                 </div>
               </div>
 
               {/* Drag instruction overlay */}
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 bg-black/50 backdrop-blur-md text-white/90 text-[10px] sm:text-xs px-3 sm:px-4 py-1 rounded-full pointer-events-none whitespace-nowrap">
-                ✦ Slide to compare
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 bg-[#0E1614]/85 backdrop-blur-md text-[#D1DED9] text-[10px] sm:text-xs px-3.5 sm:px-4 py-1.5 rounded-full pointer-events-none whitespace-nowrap border border-white/10 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#3ED9C0] animate-ping" />
+                <span>Drag slider horizontally to inspect transformation</span>
               </div>
             </div>
           </div>
 
           {/* Right: Clinical Case Details & CTA */}
-          <div className="lg:col-span-4 bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-luxury flex flex-col justify-between">
+          <div className="lg:col-span-4 glass-clinical rounded-3xl p-5 sm:p-7 border border-white/10 shadow-2xl flex flex-col justify-between">
             <div>
-              <span className="text-xs font-bold font-mono uppercase tracking-widest text-brand-600">
-                Case Documentation
+              <span className="text-xs font-mono uppercase tracking-widest text-[#3ED9C0] font-semibold">
+                Clinical Case Log
               </span>
-              <h3 className="text-xl sm:text-2xl font-display font-bold text-luxury-slate mt-1 mb-4">
+              <h3 className="text-xl sm:text-2xl font-display font-semibold text-[#F9FAF9] mt-1 mb-4">
                 {currentCase.title}
               </h3>
 
               {/* Case Metadata */}
-              <div className="grid grid-cols-2 gap-3 mb-6 text-xs">
-                <div className="bg-white p-3 rounded-xl border border-slate-200">
-                  <div className="text-slate-400 flex items-center gap-1 mb-1">
-                    <User className="w-3.5 h-3.5 text-slate-500" /> Patient
+              <div className="grid grid-cols-2 gap-2.5 mb-5 text-xs">
+                <div className="bg-[#0E1614] p-3 rounded-xl border border-white/5">
+                  <div className="text-[#A8B8B4] flex items-center gap-1.5 mb-1 font-mono text-[11px]">
+                    <User className="w-3.5 h-3.5 text-[#3ED9C0]" /> Patient
                   </div>
-                  <span className="font-semibold text-slate-800">{currentCase.patientAge}</span>
+                  <span className="font-semibold text-[#F9FAF9]">{currentCase.patientAge}</span>
                 </div>
-                <div className="bg-white p-3 rounded-xl border border-slate-200">
-                  <div className="text-slate-400 flex items-center gap-1 mb-1">
-                    <Clock className="w-3.5 h-3.5 text-slate-500" /> Timeline
+                <div className="bg-[#0E1614] p-3 rounded-xl border border-white/5">
+                  <div className="text-[#A8B8B4] flex items-center gap-1.5 mb-1 font-mono text-[11px]">
+                    <Clock className="w-3.5 h-3.5 text-[#3ED9C0]" /> Timeline
                   </div>
-                  <span className="font-semibold text-slate-800">{currentCase.duration}</span>
+                  <span className="font-semibold text-[#F9FAF9] font-mono">{currentCase.duration}</span>
                 </div>
               </div>
 
               {/* Problem vs Solution */}
-              <div className="space-y-4 mb-6 text-xs sm:text-sm">
-                <div className="bg-amber-50/80 p-3.5 rounded-2xl border border-amber-200/70">
-                  <span className="font-semibold text-amber-800 block mb-1">Diagnostic Challenge:</span>
-                  <p className="text-amber-900/80 leading-relaxed">{currentCase.problem}</p>
+              <div className="space-y-3.5 mb-5 text-xs sm:text-sm">
+                <div className="bg-[#0E1614] p-3.5 rounded-2xl border border-amber-500/20">
+                  <span className="font-semibold text-amber-300 block mb-1 text-xs font-mono uppercase tracking-wide">
+                    Diagnostic Challenge:
+                  </span>
+                  <p className="text-[#D1DED9] text-xs leading-relaxed">{currentCase.problem}</p>
                 </div>
 
-                <div className="bg-emerald-50/80 p-3.5 rounded-2xl border border-emerald-200/70">
-                  <span className="font-semibold text-emerald-800 flex items-center gap-1.5 mb-1">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Clinical Solution:
+                <div className="bg-[#0E1614] p-3.5 rounded-2xl border border-[#3ED9C0]/20">
+                  <span className="font-semibold text-[#3ED9C0] flex items-center gap-1.5 mb-1 text-xs font-mono uppercase tracking-wide">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#3ED9C0]" /> Clinical Solution:
                   </span>
-                  <p className="text-emerald-900/80 leading-relaxed">{currentCase.solution}</p>
+                  <p className="text-[#D1DED9] text-xs leading-relaxed">{currentCase.solution}</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-xs text-slate-500 mb-6 pb-6 border-b border-slate-200">
-                <Stethoscope className="w-4 h-4 text-brand-600" />
-                <span>Lead Clinician: <strong className="text-slate-800">{currentCase.doctorName}</strong></span>
+              <div className="flex items-center gap-2 text-xs text-[#A8B8B4] mb-5 pb-5 border-t border-white/10">
+                <Stethoscope className="w-4 h-4 text-[#3ED9C0]" />
+                <span>Lead Clinician: <strong className="text-[#F9FAF9]">{currentCase.doctorName}</strong></span>
               </div>
             </div>
 
             <button
               onClick={onBookConsultation}
-              className="w-full py-3.5 px-6 rounded-xl bg-luxury-slate text-white font-semibold text-sm hover:bg-slate-800 transition-all shadow-md flex items-center justify-center gap-2"
+              className="btn-tactile-primary w-full py-3.5 px-5 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 group"
             >
-              <Sparkles className="w-4 h-4 text-brand-400" />
-              Discuss Similar Transformation
+              <Sparkles className="w-4 h-4 text-[#07221C]" />
+              <span>Discuss Similar Transformation</span>
+              <ChevronRight className="w-4 h-4 text-[#07221C] group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
         </div>
