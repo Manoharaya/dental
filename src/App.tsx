@@ -1,34 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CLINIC_PROFILES } from './config/clinicData';
+import { PageType } from './types/navigation';
 import { Navbar } from './components/layout/Navbar';
 import { MobileBottomBar } from './components/layout/MobileBottomBar';
-import { HeroSection } from './components/sections/HeroSection';
-import { TrustStatsBar } from './components/sections/TrustStatsBar';
-import { TreatmentsSection } from './components/sections/TreatmentsSection';
-import { DentalExplorer3D } from './components/three/DentalExplorer3D';
-import { TreatmentJourneySection } from './components/sections/TreatmentJourneySection';
-import { BeforeAfterSection } from './components/sections/BeforeAfterSection';
-import { DoctorsSection } from './components/sections/DoctorsSection';
-import { EmergencySection } from './components/sections/EmergencySection';
-import { TechnologySection } from './components/sections/TechnologySection';
-import { SmileSimulatorSection } from './components/sections/SmileSimulatorSection';
-import { FinancingInsuranceSection } from './components/sections/FinancingInsuranceSection';
-import { ReviewsSection } from './components/sections/ReviewsSection';
-import { FaqAndEducationSection } from './components/sections/FaqAndEducationSection';
-import { LocationContactSection } from './components/sections/LocationContactSection';
 import { Footer } from './components/layout/Footer';
 import { BookingModal } from './components/booking/BookingModal';
 import { AiDentalAssistantModal } from './components/ai/AiDentalAssistantModal';
+import { HomePage } from './pages/HomePage';
+import { TreatmentsPage } from './pages/TreatmentsPage';
+import { TechnologyPage } from './pages/TechnologyPage';
+import { DoctorsPage } from './pages/DoctorsPage';
+import { GalleryPage } from './pages/GalleryPage';
+import { PatientCarePage } from './pages/PatientCarePage';
+import { ContactPage } from './pages/ContactPage';
 import { Bot, Sparkles } from 'lucide-react';
 
 export function App() {
   const [activeClinicId] = useState<string>('aura');
+  const [currentPage, setCurrentPage] = useState<PageType>(() => {
+    const hash = window.location.hash.replace('#', '') as PageType;
+    const validPages: PageType[] = ['home', 'treatments', 'technology', 'doctors', 'gallery', 'patient-care', 'contact'];
+    return validPages.includes(hash) ? hash : 'home';
+  });
+
   const [isBookingOpen, setIsBookingOpen] = useState<boolean>(false);
   const [isAiOpen, setIsAiOpen] = useState<boolean>(false);
   const [preselectedTreatment, setPreselectedTreatment] = useState<string>('veneers');
   const [preselectedDentist, setPreselectedDentist] = useState<string>('any');
 
   const currentClinic = CLINIC_PROFILES[activeClinicId] || CLINIC_PROFILES.aura;
+
+  // Listen to browser hash change (Back / Forward navigation)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '') as PageType;
+      const validPages: PageType[] = ['home', 'treatments', 'technology', 'doctors', 'gallery', 'patient-care', 'contact'];
+      if (validPages.includes(hash)) {
+        setCurrentPage(hash);
+      } else if (!hash) {
+        setCurrentPage('home');
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleNavigate = (page: PageType) => {
+    setCurrentPage(page);
+    window.location.hash = page === 'home' ? '' : page;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleOpenBooking = (treatmentId?: string, dentistId?: string) => {
     if (treatmentId) setPreselectedTreatment(treatmentId);
@@ -39,100 +61,79 @@ export function App() {
   return (
     <div className="min-h-screen flex flex-col bg-[#FBFAF7] text-[#1B2B27] font-sans selection:bg-[#3E8E7E]/20 selection:text-[#1B2B27]">
 
-      {/* Sticky Glassmorphic Navbar */}
+      {/* Sticky Glassmorphic Navbar with Active Page Indicators */}
       <Navbar
         clinic={currentClinic}
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
         onOpenBooking={() => handleOpenBooking()}
         onOpenAi={() => setIsAiOpen(true)}
       />
 
-      {/* Main Page Flow */}
+      {/* Main Routed Page Flow */}
       <main className="flex-grow">
-        {/* Hero Section with Interactive 3D Tooth */}
-        <HeroSection
-          clinic={currentClinic}
-          onOpenBooking={() => handleOpenBooking()}
-          onOpenAi={() => setIsAiOpen(true)}
-        />
+        {currentPage === 'home' && (
+          <HomePage
+            clinic={currentClinic}
+            onNavigate={handleNavigate}
+            onOpenBooking={handleOpenBooking}
+            onOpenAi={() => setIsAiOpen(true)}
+          />
+        )}
 
-        {/* Configurable Trust Stats Bar */}
-        <TrustStatsBar clinic={currentClinic} />
+        {currentPage === 'treatments' && (
+          <TreatmentsPage
+            onNavigate={handleNavigate}
+            onOpenBooking={handleOpenBooking}
+          />
+        )}
 
-        {/* Interactive Treatment Explorer */}
-        <TreatmentsSection
-          onSelectTreatmentForBooking={(treatmentId) => handleOpenBooking(treatmentId)}
-        />
+        {currentPage === 'technology' && (
+          <TechnologyPage
+            onNavigate={handleNavigate}
+            onOpenBooking={handleOpenBooking}
+          />
+        )}
 
-        {/* Signature Interactive 3D Dental Arch & Anatomy Explorer */}
-        <section id="3d-explorer" className="py-24 bg-[#F5F1EA] text-[#1B2B27] relative border-t border-[#1B2B27]/08">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <DentalExplorer3D
-              onSelectTreatment={() => handleOpenBooking()}
-              onBookConsultation={() => handleOpenBooking()}
-            />
-          </div>
-        </section>
+        {currentPage === 'doctors' && (
+          <DoctorsPage
+            onNavigate={handleNavigate}
+            onOpenBooking={handleOpenBooking}
+          />
+        )}
 
-        {/* 5-Step Patient Treatment Journey */}
-        <TreatmentJourneySection
-          onBookConsultation={() => handleOpenBooking()}
-        />
+        {currentPage === 'gallery' && (
+          <GalleryPage
+            clinic={currentClinic}
+            onNavigate={handleNavigate}
+            onOpenBooking={() => handleOpenBooking()}
+          />
+        )}
 
-        {/* "Real Results. Real Confidence." Draggable Before/After Slider */}
-        <BeforeAfterSection
-          onBookConsultation={() => handleOpenBooking()}
-        />
+        {currentPage === 'patient-care' && (
+          <PatientCarePage
+            clinic={currentClinic}
+            onNavigate={handleNavigate}
+            onOpenBooking={handleOpenBooking}
+            onOpenAi={() => setIsAiOpen(true)}
+          />
+        )}
 
-        {/* Specialist Dentists */}
-        <DoctorsSection
-          onBookWithDoctor={(dentistId) => handleOpenBooking(undefined, dentistId)}
-        />
-
-        {/* Urgent Care & Same-Day Emergency Dentistry */}
-        <EmergencySection
-          clinic={currentClinic}
-          onOpenBooking={() => handleOpenBooking('emergency')}
-          onOpenAi={() => setIsAiOpen(true)}
-        />
-
-        {/* High-Tech Diagnostic & Robotics Showcase */}
-        <TechnologySection
-          onBookConsultation={() => handleOpenBooking()}
-        />
-
-        {/* Interactive Smile Simulator */}
-        <SmileSimulatorSection
-          onBookSmileDesign={() => handleOpenBooking('veneers')}
-        />
-
-        {/* Flexible 0% APR Financing & Insurance Checker */}
-        <FinancingInsuranceSection
-          onCheckInsurance={() => handleOpenBooking()}
-        />
-
-        {/* Patient Reviews, Ratings & Video Testimonials */}
-        <ReviewsSection
-          clinic={currentClinic}
-          onBookConsultation={() => handleOpenBooking()}
-        />
-
-        {/* Searchable FAQ & Educational Blog */}
-        <FaqAndEducationSection
-          onBookConsultation={() => handleOpenBooking()}
-        />
-
-        {/* Clinic Location, Interactive Map & Operating Hours */}
-        <LocationContactSection
-          clinic={currentClinic}
-          onOpenBooking={() => handleOpenBooking()}
-        />
+        {currentPage === 'contact' && (
+          <ContactPage
+            clinic={currentClinic}
+            onNavigate={handleNavigate}
+            onOpenBooking={() => handleOpenBooking()}
+          />
+        )}
       </main>
 
-      {/* Comprehensive Footer */}
+      {/* Comprehensive Footer with Page Navigation */}
       <Footer
         clinic={currentClinic}
         onOpenBooking={() => handleOpenBooking()}
         onOpenAi={() => setIsAiOpen(true)}
+        onNavigate={handleNavigate}
       />
 
       {/* Persistent Mobile Bottom Action Bar */}

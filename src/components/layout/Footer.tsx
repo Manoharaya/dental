@@ -1,19 +1,29 @@
 import React from 'react';
 import { ClinicProfile } from '../../types/clinic';
+import { PageType } from '../../types/navigation';
 import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
 
 interface FooterProps {
   clinic: ClinicProfile;
   onOpenBooking: () => void;
   onOpenAi: () => void;
+  onNavigate?: (page: PageType) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   clinic,
   onOpenBooking,
+  onNavigate,
 }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLinkClick = (e: React.MouseEvent, page: PageType) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(page);
+    }
   };
 
   return (
@@ -23,14 +33,19 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 1 & 2: Brand & Mission */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-white text-[#3E8E7E] flex items-center justify-center border border-[#1B2B27]/08 shadow-spa">
-                <svg className="w-5 h-5 text-[#3E8E7E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2C7.5 2 4 4.5 4 8c0 3 1.5 5 2.5 7.5S8 22 10 22s2-2.5 2-4.5c0 2 0 4.5 2 4.5s2.5-4 3.5-6.5S20 11 20 8c0-3.5-3.5-6-8-6z"/>
-                </svg>
-              </div>
-              <span className="font-serif font-normal text-xl text-[#1B2B27] tracking-tight">
-                {clinic.name}
-              </span>
+              <button
+                onClick={(e) => handleLinkClick(e, 'home')}
+                className="flex items-center gap-3 text-left group"
+              >
+                <div className="w-10 h-10 rounded-2xl bg-white text-[#3E8E7E] flex items-center justify-center border border-[#1B2B27]/08 shadow-spa group-hover:border-[#3E8E7E]/50 transition-colors">
+                  <svg className="w-5 h-5 text-[#3E8E7E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2C7.5 2 4 4.5 4 8c0 3 1.5 5 2.5 7.5S8 22 10 22s2-2.5 2-4.5c0 2 0 4.5 2 4.5s2.5-4 3.5-6.5S20 11 20 8c0-3.5-3.5-6-8-6z"/>
+                  </svg>
+                </div>
+                <span className="font-serif font-normal text-xl text-[#1B2B27] tracking-tight group-hover:text-[#3E8E7E] transition-colors">
+                  {clinic.name}
+                </span>
+              </button>
             </div>
 
             <p className="text-xs sm:text-sm text-[#536963] leading-relaxed max-w-sm">
@@ -59,12 +74,12 @@ export const Footer: React.FC<FooterProps> = ({
               Aesthetic & Surgical
             </h4>
             <ul className="space-y-2 text-xs text-[#536963]">
-              <li><a href="#treatments" className="hover:text-[#3E8E7E] transition-colors">Porcelain Veneers</a></li>
-              <li><a href="#treatments" className="hover:text-[#3E8E7E] transition-colors">Computer-Guided Implants</a></li>
-              <li><a href="#treatments" className="hover:text-[#3E8E7E] transition-colors">Invisalign® Aligners</a></li>
-              <li><a href="#treatments" className="hover:text-[#3E8E7E] transition-colors">Laser Teeth Whitening</a></li>
-              <li><a href="#treatments" className="hover:text-[#3E8E7E] transition-colors">All-on-4 Same-Day Arch</a></li>
-              <li><a href="#treatments" className="hover:text-[#3E8E7E] transition-colors">CEREC® Same-Day Crowns</a></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'treatments')} className="hover:text-[#3E8E7E] transition-colors text-left">Porcelain Veneers</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'treatments')} className="hover:text-[#3E8E7E] transition-colors text-left">Computer-Guided Implants</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'treatments')} className="hover:text-[#3E8E7E] transition-colors text-left">Invisalign® Aligners</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'treatments')} className="hover:text-[#3E8E7E] transition-colors text-left">Laser Teeth Whitening</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'treatments')} className="hover:text-[#3E8E7E] transition-colors text-left">All-on-4 Same-Day Arch</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'treatments')} className="hover:text-[#3E8E7E] transition-colors text-left">CEREC® Same-Day Crowns</button></li>
             </ul>
           </div>
 
@@ -74,12 +89,12 @@ export const Footer: React.FC<FooterProps> = ({
               Explore Practice
             </h4>
             <ul className="space-y-2 text-xs text-[#536963]">
-              <li><a href="#3d-explorer" className="hover:text-[#3E8E7E] transition-colors">3D Dental Anatomy Explorer</a></li>
-              <li><a href="#gallery" className="hover:text-[#3E8E7E] transition-colors">Before & After Smile Gallery</a></li>
-              <li><a href="#simulator" className="hover:text-[#3E8E7E] transition-colors">Interactive Smile Simulator</a></li>
-              <li><a href="#dentists" className="hover:text-[#3E8E7E] transition-colors">Doctor Credentials & Faculty</a></li>
-              <li><a href="#technology" className="hover:text-[#3E8E7E] transition-colors">3D CBCT & Optical Scanners</a></li>
-              <li><a href="#financing" className="hover:text-[#3E8E7E] transition-colors">0% APR Payment Calculator</a></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'technology')} className="hover:text-[#3E8E7E] transition-colors text-left">3D Dental Anatomy Explorer</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'gallery')} className="hover:text-[#3E8E7E] transition-colors text-left">Before & After Smile Gallery</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'technology')} className="hover:text-[#3E8E7E] transition-colors text-left">Interactive Smile Simulator</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'doctors')} className="hover:text-[#3E8E7E] transition-colors text-left">Doctor Credentials & Faculty</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'technology')} className="hover:text-[#3E8E7E] transition-colors text-left">3D CBCT & Optical Scanners</button></li>
+              <li><button onClick={(e) => handleLinkClick(e, 'treatments')} className="hover:text-[#3E8E7E] transition-colors text-left">0% APR Payment Calculator</button></li>
             </ul>
           </div>
 
@@ -105,7 +120,7 @@ export const Footer: React.FC<FooterProps> = ({
 
             <button
               onClick={onOpenBooking}
-              className="btn-tactile-primary w-full py-2.5 px-3 rounded-xl text-xs font-semibold"
+              className="btn-tactile-primary w-full py-2.5 px-3 rounded-xl text-xs font-semibold text-white"
             >
               Book Online Now
             </button>

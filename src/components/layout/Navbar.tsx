@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone, Bot, Calendar, ChevronRight } from 'lucide-react';
 import type { ClinicProfile } from '../../types/clinic';
+import { PageType } from '../../types/navigation';
 
 interface NavbarProps {
   clinic: ClinicProfile;
+  currentPage: PageType;
+  onNavigate: (page: PageType) => void;
   onOpenBooking: () => void;
   onOpenAi: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   clinic,
+  currentPage,
+  onNavigate,
   onOpenBooking,
   onOpenAi,
 }) => {
@@ -24,16 +29,20 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'Treatments', href: '#treatments' },
-    { label: '3D Explorer', href: '#3d-explorer' },
-    { label: 'Smile Gallery', href: '#gallery' },
-    { label: 'Dentists', href: '#dentists' },
-    { label: 'Technology', href: '#technology' },
-    { label: 'Simulator', href: '#simulator' },
-    { label: 'Financing', href: '#financing' },
-    { label: 'Contact', href: '#contact' },
+  const navLinks: { label: string; page: PageType }[] = [
+    { label: 'Home', page: 'home' },
+    { label: 'Treatments', page: 'treatments' },
+    { label: 'Technology & 3D', page: 'technology' },
+    { label: 'Doctors', page: 'doctors' },
+    { label: 'Smile Gallery', page: 'gallery' },
+    { label: 'Patient Care', page: 'patient-care' },
+    { label: 'Contact', page: 'contact' },
   ];
+
+  const handleNavClick = (page: PageType) => {
+    onNavigate(page);
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header
@@ -47,7 +56,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center justify-between gap-1 sm:gap-4 w-full flex-nowrap">
           
           {/* Logo & Clinic Brand */}
-          <a href="#" className="flex items-center gap-2.5 sm:gap-3 shrink min-w-0 group">
+          <button
+            onClick={() => handleNavClick('home')}
+            className="flex items-center gap-2.5 sm:gap-3 shrink min-w-0 group text-left"
+          >
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#F5F1EA] border border-[#3E8E7E]/30 text-[#3E8E7E] flex items-center justify-center shadow-sm group-hover:border-[#3E8E7E]/60 transition-all shrink-0">
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#3E8E7E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2C7.5 2 4 4.5 4 8c0 3 1.5 5 2.5 7.5S8 22 10 22s2-2.5 2-4.5c0 2 0 4.5 2 4.5s2.5-4 3.5-6.5S20 11 20 8c0-3.5-3.5-6-8-6z"/>
@@ -61,20 +73,29 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {clinic.city} • {clinic.state}
               </span>
             </div>
-          </a>
+          </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-4 2xl:gap-6 text-xs font-medium text-[#536963] shrink-0 whitespace-nowrap">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="whitespace-nowrap shrink-0 hover:text-[#3E8E7E] transition-colors py-1 relative group"
-              >
-                {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#3E8E7E] transition-all duration-200 group-hover:w-full" />
-              </a>
-            ))}
+          <nav className="hidden xl:flex items-center gap-3 2xl:gap-5 text-xs font-medium shrink-0 whitespace-nowrap">
+            {navLinks.map((link) => {
+              const isActive = currentPage === link.page;
+              return (
+                <button
+                  key={link.page}
+                  onClick={() => handleNavClick(link.page)}
+                  className={`whitespace-nowrap shrink-0 transition-colors py-1.5 px-2 rounded-lg relative group ${
+                    isActive
+                      ? 'text-[#3E8E7E] font-semibold'
+                      : 'text-[#536963] hover:text-[#1B2B27]'
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-2 right-2 h-[2px] bg-[#3E8E7E] rounded-full" />
+                  )}
+                </button>
+              );
+            })}
           </nav>
 
           {/* Right Action CTAs */}
@@ -112,7 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Book Appointment CTA */}
             <button
               onClick={onOpenBooking}
-              className="btn-tactile-primary inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs whitespace-nowrap shrink-0 group"
+              className="btn-tactile-primary inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs whitespace-nowrap shrink-0 group text-white"
             >
               <Calendar className="w-3.5 h-3.5 text-white shrink-0" />
               <span className="whitespace-nowrap hidden xs:inline sm:hidden">Book</span>
@@ -135,16 +156,22 @@ export const Navbar: React.FC<NavbarProps> = ({
         {isMobileMenuOpen && (
           <div className="xl:hidden pt-3 pb-5 border-t border-[#1B2B27]/08 mt-3 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
             <div className="grid grid-cols-2 gap-2 text-xs font-medium text-[#1B2B27]">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2.5 rounded-xl bg-white border border-[#1B2B27]/08 hover:border-[#3E8E7E]/30 hover:text-[#3E8E7E] transition-colors whitespace-nowrap text-center shadow-sm"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = currentPage === link.page;
+                return (
+                  <button
+                    key={link.page}
+                    onClick={() => handleNavClick(link.page)}
+                    className={`p-2.5 rounded-xl border transition-colors whitespace-nowrap text-center shadow-sm ${
+                      isActive
+                        ? 'bg-[#3E8E7E]/10 border-[#3E8E7E]/30 text-[#3E8E7E] font-semibold'
+                        : 'bg-white border-[#1B2B27]/08 text-[#1B2B27] hover:border-[#3E8E7E]/30 hover:text-[#3E8E7E]'
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+                );
+              })}
             </div>
 
             <div className="space-y-2 pt-2 border-t border-[#1B2B27]/08">
@@ -160,7 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setIsMobileMenuOpen(false);
                   onOpenBooking();
                 }}
-                className="btn-tactile-primary w-full py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2"
+                className="btn-tactile-primary w-full py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 text-white"
               >
                 <Calendar className="w-4 h-4 text-white" />
                 <span>Reserve Consultation</span>
