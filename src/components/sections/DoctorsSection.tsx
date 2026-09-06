@@ -30,15 +30,15 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
         </div>
 
         {/* Doctor Grid Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {DENTISTS_DATA.map((doc) => (
             <div
               key={doc.id}
-              className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-luxury hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/90 shadow-luxury hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
                 {/* Doctor Portrait Image */}
-                <div className="relative h-64 w-full overflow-hidden bg-slate-100">
+                <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-slate-100">
                   <img
                     src={doc.image}
                     alt={doc.name}
@@ -49,32 +49,32 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
                     <span>{doc.rating}</span>
                     <span className="text-slate-400 font-normal">({doc.reviewCount})</span>
                   </div>
-                  <div className="absolute bottom-3 left-3 bg-luxury-slate/85 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded-full border border-white/20">
+                  <div className="absolute bottom-3 left-3 bg-luxury-slate/85 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-full border border-white/20">
                     {doc.experienceYears}+ Years Clinical Exp.
                   </div>
                 </div>
 
                 {/* Body Content */}
-                <div className="p-5">
-                  <span className="text-[11px] font-mono text-brand-600 uppercase tracking-widest font-semibold block">
+                <div className="p-4 sm:p-5">
+                  <span className="text-[10px] sm:text-[11px] font-mono text-brand-600 uppercase tracking-widest font-semibold block">
                     {doc.credentials}
                   </span>
-                  <h3 className="text-lg font-display font-bold text-luxury-slate mt-0.5 group-hover:text-brand-600 transition-colors">
+                  <h3 className="text-base sm:text-lg font-display font-bold text-luxury-slate mt-0.5 group-hover:text-brand-600 transition-colors">
                     {doc.name}
                   </h3>
-                  <p className="text-xs font-semibold text-slate-600 mt-1">{doc.role}</p>
-                  <p className="text-xs text-brand-700 bg-brand-50 px-2.5 py-1 rounded-lg mt-2 inline-block font-medium">
+                  <p className="text-xs font-semibold text-slate-600 mt-0.5">{doc.role}</p>
+                  <p className="text-[11px] sm:text-xs text-brand-700 bg-brand-50 px-2.5 py-1 rounded-lg mt-2 inline-block font-medium">
                     {doc.specialization}
                   </p>
 
-                  <p className="text-xs text-slate-500 mt-3 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-500 mt-2.5 line-clamp-2 leading-relaxed">
                     {doc.bio}
                   </p>
                 </div>
               </div>
 
               {/* Card Footer Actions */}
-              <div className="p-5 pt-0 space-y-2">
+              <div className="p-4 sm:p-5 pt-0 space-y-2">
                 <button
                   onClick={() => setSelectedDoctor(doc)}
                   className="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
@@ -94,10 +94,10 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
           ))}
         </div>
 
-        {/* Doctor Bio Modal */}
+        {/* Doctor Bio Modal (Bottom-sheet on mobile, centered dialog on desktop) */}
         {selectedDoctor && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-            <div className="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl border border-slate-200">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
+            <div className="bg-white rounded-t-3xl sm:rounded-3xl max-w-xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto p-5 sm:p-8 relative shadow-2xl border border-slate-200">
               <button
                 onClick={() => setSelectedDoctor(null)}
                 className="absolute top-4 right-4 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500"
@@ -105,11 +105,11 @@ export const DoctorsSection: React.FC<DoctorsSectionProps> = ({
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="flex items-start gap-4 mb-6">
+              <div className="flex items-start gap-3.5 sm:gap-4 mb-4 sm:mb-6">
                 <img
                   src={selectedDoctor.image}
                   alt={selectedDoctor.name}
-                  className="w-20 h-20 rounded-2xl object-cover border border-slate-200 shrink-0"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-slate-200 shrink-0"
                 />
                 <div>
                   <span className="text-xs font-mono text-brand-600 font-bold uppercase tracking-wider">

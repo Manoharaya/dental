@@ -163,8 +163,8 @@ export const AiDentalAssistantModal: React.FC<AiDentalAssistantModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:justify-end sm:p-6 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="w-full sm:w-[460px] h-[92vh] sm:h-[650px] bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden relative">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:justify-end p-0 sm:p-6 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="w-full sm:w-[460px] h-[94vh] sm:h-[650px] bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden relative">
         {/* Header */}
         <div className="bg-luxury-slate text-white p-4 sm:p-5 flex items-center justify-between relative z-10 border-b border-slate-700">
           <div className="flex items-center gap-3">

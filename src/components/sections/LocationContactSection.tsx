@@ -29,15 +29,15 @@ export const LocationContactSection: React.FC<LocationContactSectionProps> = ({
         </div>
 
         {/* Location Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
           {/* Left: Contact Info & Opening Hours Card */}
-          <div className="lg:col-span-5 bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-luxury flex flex-col justify-between">
-            <div className="space-y-6">
+          <div className="lg:col-span-5 bg-slate-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-slate-200/80 shadow-luxury flex flex-col justify-between">
+            <div className="space-y-5 sm:space-y-6">
               {/* Clinic Name & Status */}
-              <div className="pb-4 border-b border-slate-200">
+              <div className="pb-3 sm:pb-4 border-b border-slate-200">
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-display font-bold text-xl text-luxury-slate">{clinic.name}</h3>
-                  <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full">
+                  <h3 className="font-display font-bold text-lg sm:text-xl text-luxury-slate">{clinic.name}</h3>
+                  <span className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-emerald-700 bg-emerald-100 px-2 sm:px-2.5 py-0.5 rounded-full">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     Open Now
                   </span>
@@ -46,9 +46,9 @@ export const LocationContactSection: React.FC<LocationContactSectionProps> = ({
               </div>
 
               {/* Address */}
-              <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 text-brand-600">
-                  <MapPin className="w-5 h-5" />
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 text-brand-600">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="text-xs sm:text-sm">
                   <strong className="text-slate-900 block font-semibold">Studio Address</strong>
@@ -59,9 +59,9 @@ export const LocationContactSection: React.FC<LocationContactSectionProps> = ({
               </div>
 
               {/* Phone */}
-              <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 text-brand-600">
-                  <Phone className="w-5 h-5" />
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 text-brand-600">
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="text-xs sm:text-sm">
                   <strong className="text-slate-900 block font-semibold">Concierge Desk & Appointments</strong>
@@ -73,9 +73,9 @@ export const LocationContactSection: React.FC<LocationContactSectionProps> = ({
               </div>
 
               {/* Email */}
-              <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 text-brand-600">
-                  <Mail className="w-5 h-5" />
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 text-brand-600">
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="text-xs sm:text-sm">
                   <strong className="text-slate-900 block font-semibold">Direct Concierge Email</strong>
@@ -86,8 +86,8 @@ export const LocationContactSection: React.FC<LocationContactSectionProps> = ({
               </div>
 
               {/* Operating Hours Table */}
-              <div className="pt-4 border-t border-slate-200">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
+              <div className="pt-3 sm:pt-4 border-t border-slate-200">
+                <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5 sm:mb-3 flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-brand-500" /> Operating Schedule
                 </h4>
                 <div className="space-y-1.5 text-xs text-slate-600">
@@ -109,16 +109,16 @@ export const LocationContactSection: React.FC<LocationContactSectionProps> = ({
 
             <button
               onClick={onOpenBooking}
-              className="mt-6 w-full py-3.5 px-4 rounded-xl bg-luxury-slate hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm shadow-luxury flex items-center justify-center gap-2"
+              className="mt-5 sm:mt-6 w-full py-3 sm:py-3.5 px-4 rounded-xl bg-luxury-slate hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm shadow-luxury flex items-center justify-center gap-2"
             >
               <span>Schedule Your Visit to {clinic.city}</span>
             </button>
           </div>
 
           {/* Right: Elegant Stylized Map Card */}
-          <div className="lg:col-span-7 bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 text-white flex flex-col justify-between relative overflow-hidden shadow-luxury-dark min-h-[420px]">
+          <div className="lg:col-span-7 bg-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-slate-800 text-white flex flex-col justify-between relative overflow-hidden shadow-luxury-dark min-h-[360px] sm:min-h-[420px]">
             {/* Stylized Google Map Visual Representation */}
-            <div className="relative rounded-2xl overflow-hidden border border-slate-700/80 bg-slate-950 h-72 sm:h-80 flex items-center justify-center">
+            <div className="relative rounded-2xl overflow-hidden border border-slate-700/80 bg-slate-950 h-60 sm:h-80 flex items-center justify-center">
               {/* Map grid aesthetic */}
               <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]" />
               
@@ -128,10 +128,10 @@ export const LocationContactSection: React.FC<LocationContactSectionProps> = ({
 
               {/* Pin Marker */}
               <div className="relative z-10 flex flex-col items-center">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-cyan-400 text-white flex items-center justify-center shadow-glow mb-2 animate-bounce">
-                  <MapPin className="w-6 h-6" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-cyan-400 text-white flex items-center justify-center shadow-glow mb-2 animate-bounce">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div className="bg-white text-luxury-slate px-3.5 py-1.5 rounded-xl shadow-xl border border-slate-200 text-xs font-bold flex items-center gap-1.5">
+                <div className="bg-white text-luxury-slate px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-xl shadow-xl border border-slate-200 text-[11px] sm:text-xs font-bold flex items-center gap-1.5">
                   <span>{clinic.name}</span>
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
                 </div>
@@ -142,15 +142,15 @@ export const LocationContactSection: React.FC<LocationContactSectionProps> = ({
                 href={`https://maps.google.com/?q=${encodeURIComponent(clinic.address + ', ' + clinic.city + ', ' + clinic.state)}`}
                 target="_blank"
                 rel="noreferrer"
-                className="absolute bottom-4 right-4 z-20 flex items-center gap-2 px-3.5 py-2 rounded-xl bg-luxury-slate/90 hover:bg-black text-white text-xs font-semibold backdrop-blur-md border border-slate-700 shadow-md"
+                className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-luxury-slate/95 hover:bg-black text-white text-[11px] sm:text-xs font-semibold backdrop-blur-md border border-slate-700 shadow-md"
               >
                 <Navigation className="w-3.5 h-3.5 text-brand-400" />
-                <span>Open in Google Maps</span>
+                <span>Google Maps</span>
               </a>
             </div>
 
             {/* Parking & Accessibility Amenities */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 pt-6 border-t border-slate-800 text-xs text-slate-300">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-slate-800 text-xs text-slate-300">
               <div className="flex items-center gap-2.5">
                 <Car className="w-4 h-4 text-brand-400 shrink-0" />
                 <span>Complimentary subterranean valet parking for all appointments.</span>

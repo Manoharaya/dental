@@ -335,18 +335,18 @@ export const Tooth3DViewer: React.FC<Tooth3DViewerProps> = ({
       {webglSupported ? (
         <div
           ref={containerRef}
-          className="w-full h-80 sm:h-96 md:h-[420px] cursor-grab active:cursor-grabbing tooth-canvas-wrapper flex items-center justify-center relative"
+          className="w-full h-64 sm:h-80 md:h-[390px] cursor-grab active:cursor-grabbing tooth-canvas-wrapper flex items-center justify-center relative"
         >
           {/* Subtle 3D Depth Rings & Clinical Grid */}
           <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-30">
-            <div className="w-64 h-64 border border-brand-300/40 rounded-full animate-pulse-ring" />
-            <div className="w-48 h-48 border border-brand-200/50 rounded-full absolute" />
+            <div className="w-48 sm:w-64 h-48 sm:h-64 border border-brand-300/40 rounded-full animate-pulse-ring" />
+            <div className="w-36 sm:w-48 h-36 sm:h-48 border border-brand-200/50 rounded-full absolute" />
           </div>
 
           {/* Interactive Hint */}
           <div
-            className={`absolute bottom-3 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full border border-slate-200/80 text-xs text-slate-600 shadow-sm transition-opacity duration-300 pointer-events-none ${
-              isHovered ? 'opacity-100' : 'opacity-60'
+            className={`absolute bottom-2 bg-white/85 backdrop-blur-md px-2.5 py-1 rounded-full border border-slate-200/80 text-[10px] sm:text-xs text-slate-600 shadow-sm transition-opacity duration-300 pointer-events-none ${
+              isHovered ? 'opacity-100' : 'opacity-70'
             }`}
           >
             ✦ Click & drag to rotate in 3D
@@ -354,51 +354,51 @@ export const Tooth3DViewer: React.FC<Tooth3DViewerProps> = ({
         </div>
       ) : (
         /* Graceful Fallback Illustration */
-        <div className="w-full h-80 flex flex-col items-center justify-center bg-slate-50 rounded-3xl border border-slate-200 p-6 text-center">
-          <div className="w-28 h-28 bg-brand-50 rounded-full flex items-center justify-center text-brand-500 mb-4 shadow-glow">
-            <Sparkles className="w-12 h-12" />
+        <div className="w-full h-64 sm:h-80 flex flex-col items-center justify-center bg-slate-50 rounded-3xl border border-slate-200 p-6 text-center">
+          <div className="w-20 sm:w-28 h-20 sm:h-28 bg-brand-50 rounded-full flex items-center justify-center text-brand-500 mb-3 shadow-glow">
+            <Sparkles className="w-8 sm:w-12 h-8 sm:h-12" />
           </div>
-          <h4 className="font-display font-semibold text-slate-800 text-lg">3D Anatomical Tooth Model</h4>
-          <p className="text-sm text-slate-500 max-w-xs mt-1">WebGL is disabled or unsupported on this device. Viewing high-fidelity clinical schematic.</p>
+          <h4 className="font-display font-semibold text-slate-800 text-sm sm:text-lg">3D Anatomical Tooth Model</h4>
+          <p className="text-xs sm:text-sm text-slate-500 max-w-xs mt-1">WebGL is disabled or unsupported on this device. Viewing clinical schematic.</p>
         </div>
       )}
 
       {/* Interactive State Toggle Controls */}
       {showControls && (
-        <div className="mt-2 flex items-center gap-1.5 p-1.5 bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-luxury">
+        <div className="mt-2 flex flex-wrap justify-center items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-white/90 backdrop-blur-md rounded-xl sm:rounded-2xl border border-slate-200/90 shadow-luxury max-w-full">
           <button
             onClick={() => setToothState('healthy')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-medium transition-all ${
               toothState === 'healthy'
                 ? 'bg-brand-500 text-white shadow-glow'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
-            <ShieldCheck className="w-3.5 h-3.5" />
+            <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             Healthy Enamel
           </button>
 
           <button
             onClick={() => setToothState('decay')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-medium transition-all ${
               toothState === 'decay'
                 ? 'bg-amber-600 text-white shadow-md'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
-            <AlertCircle className="w-3.5 h-3.5" />
+            <AlertCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             Caries / Decay
           </button>
 
           <button
             onClick={() => setToothState('restored')}
-            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-medium transition-all ${
               toothState === 'restored'
                 ? 'bg-emerald-600 text-white shadow-md'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
-            <RefreshCw className="w-3.5 h-3.5" />
+            <RefreshCw className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             Restored Crown
           </button>
         </div>

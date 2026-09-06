@@ -58,7 +58,7 @@ export const BeforeAfterSection: React.FC<BeforeAfterSectionProps> = ({ onBookCo
         </div>
 
         {/* Case Category Navigation Selector */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+        <div className="flex items-center gap-2 mb-8 overflow-x-auto no-scrollbar pb-2 px-1 sm:justify-center sm:flex-wrap">
           {BEFORE_AFTER_CASES.map((item) => (
             <button
               key={item.id}
@@ -66,7 +66,7 @@ export const BeforeAfterSection: React.FC<BeforeAfterSectionProps> = ({ onBookCo
                 setSelectedCaseId(item.id);
                 setSliderPos(50);
               }}
-              className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+              className={`whitespace-nowrap shrink-0 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                 selectedCaseId === item.id
                   ? 'bg-luxury-slate text-white shadow-luxury'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900'
@@ -78,7 +78,7 @@ export const BeforeAfterSection: React.FC<BeforeAfterSectionProps> = ({ onBookCo
         </div>
 
         {/* Main Comparison Component */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           {/* Left / Top: Draggable Interactive Comparison Window */}
           <div className="lg:col-span-8">
             <div
@@ -87,7 +87,7 @@ export const BeforeAfterSection: React.FC<BeforeAfterSectionProps> = ({ onBookCo
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               onPointerCancel={handlePointerUp}
-              className="relative w-full h-80 sm:h-[420px] md:h-[480px] rounded-3xl overflow-hidden shadow-2xl select-none cursor-ew-resize border border-slate-200 group"
+              className="relative w-full h-64 sm:h-[400px] md:h-[460px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl select-none cursor-ew-resize border border-slate-200 group touch-none"
             >
               {/* After Image (Background full layer) */}
               <img
@@ -110,10 +110,10 @@ export const BeforeAfterSection: React.FC<BeforeAfterSectionProps> = ({ onBookCo
               </div>
 
               {/* Badges: Before and After */}
-              <div className="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20 pointer-events-none">
-                Initial Condition (Before)
+              <div className="absolute top-3 left-3 z-10 bg-black/60 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/20 pointer-events-none">
+                Before
               </div>
-              <div className="absolute top-4 right-4 z-10 bg-brand-500/80 backdrop-blur-md text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20 pointer-events-none shadow-glow">
+              <div className="absolute top-3 right-3 z-10 bg-brand-500/80 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/20 pointer-events-none shadow-glow">
                 Restored (After)
               </div>
 
@@ -122,14 +122,14 @@ export const BeforeAfterSection: React.FC<BeforeAfterSectionProps> = ({ onBookCo
                 className="absolute top-0 bottom-0 z-20 w-0.5 bg-white shadow-[0_0_12px_rgba(0,0,0,0.4)] pointer-events-none"
                 style={{ left: `${sliderPos}%` }}
               >
-                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-11 h-11 rounded-full bg-white text-luxury-slate shadow-xl border-2 border-brand-500 flex items-center justify-center transition-transform group-active:scale-110">
-                  <ArrowLeftRight className="w-5 h-5 text-brand-600" />
+                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white text-luxury-slate shadow-xl border-2 border-brand-500 flex items-center justify-center transition-transform group-active:scale-110">
+                  <ArrowLeftRight className="w-4 h-4 sm:w-5 sm:h-5 text-brand-600" />
                 </div>
               </div>
 
               {/* Drag instruction overlay */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 bg-black/50 backdrop-blur-md text-white/90 text-xs px-4 py-1 rounded-full pointer-events-none">
-                ✦ Slide left or right to compare
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 bg-black/50 backdrop-blur-md text-white/90 text-[10px] sm:text-xs px-3 sm:px-4 py-1 rounded-full pointer-events-none whitespace-nowrap">
+                ✦ Slide to compare
               </div>
             </div>
           </div>

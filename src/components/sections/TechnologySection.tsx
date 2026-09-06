@@ -39,33 +39,36 @@ export const TechnologySection: React.FC<TechnologySectionProps> = ({
         </div>
 
         {/* Interactive Tech Showcase: Cards + Featured Stage */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Left: Interactive Tech Selection Cards */}
-          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          {/* Left: Interactive Tech Selection Cards (2-col grid on mobile for compact scanning) */}
+          <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-2 gap-2.5 sm:gap-4">
             {TECHNOLOGY_DATA.map((tech) => (
               <div
                 key={tech.id}
-                onClick={() => setSelectedTech(tech)}
-                className={`p-4 sm:p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between ${
+                onClick={() => {
+                  setSelectedTech(tech);
+                  // On mobile, gently highlight or focus the details
+                }}
+                className={`p-3 sm:p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between select-none ${
                   selectedTech.id === tech.id
-                    ? 'border-brand-500 bg-brand-50/30 shadow-luxury'
+                    ? 'border-brand-500 bg-brand-50/40 shadow-luxury ring-2 ring-brand-400/20'
                     : 'border-slate-200 bg-white hover:border-slate-300'
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center">
-                      {iconMap[tech.icon] || <Sparkles className="w-5 h-5 text-brand-500" />}
+                  <div className="flex items-center justify-between mb-2 sm:mb-3">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0">
+                      {iconMap[tech.icon] || <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-brand-500" />}
                     </div>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-slate-100 text-slate-600">
+                    <span className="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full font-semibold bg-slate-100 text-slate-600 truncate max-w-[80px]">
                       {tech.badge}
                     </span>
                   </div>
-                  <h4 className="font-bold text-xs sm:text-sm text-slate-900">{tech.title}</h4>
-                  <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">{tech.tagline}</p>
+                  <h4 className="font-bold text-xs sm:text-sm text-slate-900 leading-snug line-clamp-1 sm:line-clamp-none">{tech.title}</h4>
+                  <p className="text-[10px] sm:text-[11px] text-slate-500 mt-1 line-clamp-2">{tech.tagline}</p>
                 </div>
-                <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs text-brand-600 font-semibold">
-                  <span>Explore Tech</span>
+                <div className="pt-2 sm:pt-3 mt-2 sm:mt-3 border-t border-slate-100 flex items-center justify-between text-[11px] sm:text-xs text-brand-600 font-semibold">
+                  <span>Explore</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </div>
               </div>
@@ -73,9 +76,9 @@ export const TechnologySection: React.FC<TechnologySectionProps> = ({
           </div>
 
           {/* Right: Featured Deep-Dive Stage Card */}
-          <div className="lg:col-span-6 bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-luxury-dark flex flex-col justify-between relative overflow-hidden">
+          <div className="lg:col-span-6 bg-slate-900 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-slate-800 shadow-luxury-dark flex flex-col justify-between relative overflow-hidden">
             <div className="relative z-10">
-              <div className="h-52 w-full rounded-2xl overflow-hidden mb-6 border border-slate-700/80 bg-slate-950">
+              <div className="h-44 sm:h-52 w-full rounded-2xl overflow-hidden mb-4 sm:mb-6 border border-slate-700/80 bg-slate-950">
                 <img
                   src={selectedTech.image}
                   alt={selectedTech.title}
@@ -83,16 +86,16 @@ export const TechnologySection: React.FC<TechnologySectionProps> = ({
                 />
               </div>
 
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
                 <span className="text-xs font-mono text-brand-400 uppercase tracking-widest font-semibold">
                   {selectedTech.badge}
                 </span>
               </div>
-              <h3 className="text-2xl font-display font-bold text-white mb-2">
+              <h3 className="text-xl sm:text-2xl font-display font-bold text-white mb-1.5 sm:mb-2">
                 {selectedTech.title}
               </h3>
-              <p className="text-xs text-brand-300 font-medium mb-4">{selectedTech.tagline}</p>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+              <p className="text-xs text-brand-300 font-medium mb-3 sm:mb-4">{selectedTech.tagline}</p>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 sm:mb-6">
                 {selectedTech.description}
               </p>
 

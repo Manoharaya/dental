@@ -41,17 +41,17 @@ export const FaqAndEducationSection: React.FC<FaqAndEducationSectionProps> = ({
         </div>
 
         {/* Grid: Searchable FAQ Accordion on Left, Educational Blog Guides on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-start mb-16 sm:mb-20">
           {/* Left: Searchable FAQ Accordion */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-luxury">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+          <div className="lg:col-span-7 bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-slate-200/90 shadow-luxury">
+            <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-100 mb-4 sm:mb-6">
               <div className="flex items-center gap-2">
-                <HelpCircle className="w-5 h-5 text-brand-500" />
-                <h3 className="font-display font-bold text-lg text-luxury-slate">
+                <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-brand-500" />
+                <h3 className="font-display font-bold text-base sm:text-lg text-luxury-slate">
                   Search Common Inquiries
                 </h3>
               </div>
-              <span className="text-xs text-slate-400">
+              <span className="text-[11px] sm:text-xs text-slate-400">
                 {filteredFaqs.length} {filteredFaqs.length === 1 ? 'result' : 'results'}
               </span>
             </div>

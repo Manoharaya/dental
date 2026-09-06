@@ -100,21 +100,21 @@ END:VCALENDAR`;
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[92vh]">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="w-full max-w-2xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-[94vh] sm:h-auto sm:max-h-[90vh]">
         {/* Modal Top Bar */}
-        <div className="p-4 sm:p-6 bg-luxury-slate text-white flex items-center justify-between border-b border-slate-700">
+        <div className="p-3.5 sm:p-6 bg-luxury-slate text-white flex items-center justify-between border-b border-slate-700 shrink-0">
           <div>
-            <span className="text-[11px] font-mono text-brand-400 uppercase tracking-widest font-semibold">
+            <span className="text-[10px] sm:text-[11px] font-mono text-brand-400 uppercase tracking-widest font-semibold">
               Instant Online Scheduling
             </span>
-            <h3 className="text-xl font-display font-bold text-white mt-0.5">
+            <h3 className="text-base sm:text-xl font-display font-bold text-white mt-0.5 truncate max-w-[280px] sm:max-w-none">
               Book Your Visit at {clinic.name}
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -122,7 +122,7 @@ END:VCALENDAR`;
 
         {/* Multi-Step Progress Tracker (Steps 1–5) */}
         {step < 6 && (
-          <div className="px-6 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs">
+          <div className="px-4 sm:px-6 py-2.5 sm:py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between text-xs shrink-0">
             {[
               { num: 1, label: 'Patient' },
               { num: 2, label: 'Treatment' },
@@ -130,9 +130,9 @@ END:VCALENDAR`;
               { num: 4, label: 'Time' },
               { num: 5, label: 'Details' },
             ].map((s) => (
-              <div key={s.num} className="flex items-center gap-1.5">
+              <div key={s.num} className="flex items-center gap-1 sm:gap-1.5">
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold ${
+                  className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[10px] sm:text-[11px] font-bold ${
                     step === s.num
                       ? 'bg-brand-500 text-white shadow-glow'
                       : step > s.num
@@ -140,7 +140,7 @@ END:VCALENDAR`;
                       : 'bg-slate-200 text-slate-500'
                   }`}
                 >
-                  {step > s.num ? <Check className="w-3.5 h-3.5" /> : s.num}
+                  {step > s.num ? <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> : s.num}
                 </div>
                 <span className={`hidden sm:inline font-medium ${step === s.num ? 'text-slate-900 font-semibold' : 'text-slate-500'}`}>
                   {s.label}
@@ -151,7 +151,7 @@ END:VCALENDAR`;
         )}
 
         {/* Step Content Area */}
-        <div className="flex-1 overflow-y-auto p-5 sm:p-8">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-8">
           {/* STEP 1: Patient Type */}
           {step === 1 && (
             <div className="space-y-4">

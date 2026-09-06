@@ -14,7 +14,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
   onOpenAi,
 }) => {
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-slate-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] py-2 px-4">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-slate-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] pt-2 px-3 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
       <div className="grid grid-cols-3 gap-2 max-w-md mx-auto">
         {/* 1. Phone Call */}
         <a

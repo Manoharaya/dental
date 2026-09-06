@@ -18,9 +18,9 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="bg-slate-950 text-white pt-16 pb-24 lg:pb-16 border-t border-slate-800 relative z-30">
+    <footer className="bg-slate-950 text-white pt-12 sm:pt-16 pb-28 lg:pb-16 border-t border-slate-800 relative z-30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-slate-800">
           {/* Col 1 & 2: Brand & Mission */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">

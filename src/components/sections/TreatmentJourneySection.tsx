@@ -70,8 +70,8 @@ export const TreatmentJourneySection: React.FC<TreatmentJourneySectionProps> = (
           </p>
         </div>
 
-        {/* 5-Step Desktop Interactive Journey Horizontal Roadmap */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-3 mb-10">
+        {/* 5-Step Interactive Journey: Swipeable on mobile, 5-column grid on desktop */}
+        <div className="flex md:grid md:grid-cols-5 overflow-x-auto no-scrollbar gap-3 mb-6 sm:mb-10 pb-2 md:pb-0 snap-x">
           {journeySteps.map((item, idx) => {
             const stepNum = idx + 1;
             const isCurrent = activeStep === stepNum;
@@ -79,24 +79,24 @@ export const TreatmentJourneySection: React.FC<TreatmentJourneySectionProps> = (
               <div
                 key={item.step}
                 onClick={() => setActiveStep(stepNum)}
-                className={`p-4 sm:p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between ${
+                className={`flex-shrink-0 w-[210px] sm:w-[240px] md:w-auto snap-center p-3.5 sm:p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col justify-between select-none ${
                   isCurrent
-                    ? 'border-brand-500 bg-brand-50/40 shadow-luxury'
+                    ? 'border-brand-500 bg-brand-50/50 shadow-luxury ring-2 ring-brand-400/20'
                     : 'border-slate-200 bg-slate-50 hover:bg-white hover:border-slate-300'
                 }`}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`font-mono text-xs font-bold ${isCurrent ? 'text-brand-600' : 'text-slate-400'}`}>
+                <div className="flex items-center justify-between mb-2 sm:mb-3">
+                  <span className={`font-mono text-[11px] sm:text-xs font-bold ${isCurrent ? 'text-brand-600' : 'text-slate-400'}`}>
                     STEP {item.step}
                   </span>
-                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${
+                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center ${
                     isCurrent ? 'bg-white shadow-sm' : 'bg-slate-200/60'
                   }`}>
                     {item.icon}
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold text-xs sm:text-sm text-slate-900">{item.title}</h4>
+                  <h4 className="font-bold text-xs sm:text-sm text-slate-900 leading-snug">{item.title}</h4>
                   <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">{item.tagline}</p>
                 </div>
               </div>
@@ -104,33 +104,39 @@ export const TreatmentJourneySection: React.FC<TreatmentJourneySectionProps> = (
           })}
         </div>
 
+        {/* Mobile Swipe Guidance Note */}
+        <div className="md:hidden flex items-center justify-between text-[11px] text-slate-400 -mt-3 mb-5 px-1">
+          <span>Swipe horizontally to view all 5 steps</span>
+          <span className="font-mono text-brand-600 font-bold">Step {activeStep} of 5 active</span>
+        </div>
+
         {/* Expanded Active Step Detail View Card */}
         {(() => {
           const current = journeySteps[activeStep - 1];
           return (
-            <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-luxury-dark border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-8 space-y-4">
+            <div className="bg-slate-900 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-luxury-dark border border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+              <div className="lg:col-span-8 space-y-3 sm:space-y-4">
                 <div className="flex items-center gap-2 text-xs font-mono text-brand-400 font-bold uppercase tracking-widest">
                   <span>Phase {current.step} of 05</span>
                   <span>•</span>
                   <span>{current.tagline}</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-display font-bold text-white">
+                <h3 className="text-xl sm:text-3xl font-display font-bold text-white">
                   {current.title}
                 </h3>
-                <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+                <p className="text-xs sm:text-base text-slate-300 leading-relaxed max-w-2xl">
                   {current.description}
                 </p>
 
-                <div className="pt-3">
-                  <h5 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                <div className="pt-2 sm:pt-3">
+                  <h5 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
                     Included in this stage:
                   </h5>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {current.deliverables.map((d, i) => (
                       <span
                         key={i}
-                        className="text-xs bg-slate-800 text-slate-200 px-3 py-1.5 rounded-xl border border-slate-700"
+                        className="text-[11px] sm:text-xs bg-slate-800 text-slate-200 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-slate-700"
                       >
                         ✦ {d}
                       </span>
@@ -139,10 +145,10 @@ export const TreatmentJourneySection: React.FC<TreatmentJourneySectionProps> = (
                 </div>
               </div>
 
-              <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-center">
+              <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-center pt-2 lg:pt-0">
                 <button
                   onClick={onBookConsultation}
-                  className="w-full sm:w-auto py-3.5 px-6 rounded-xl bg-gradient-to-r from-brand-500 to-cyan-500 hover:from-brand-600 hover:to-cyan-600 text-white font-semibold text-sm shadow-glow flex items-center justify-center gap-2 transition-all"
+                  className="w-full sm:w-auto py-3 sm:py-3.5 px-6 rounded-xl bg-gradient-to-r from-brand-500 to-cyan-500 hover:from-brand-600 hover:to-cyan-600 text-white font-semibold text-xs sm:text-sm shadow-glow flex items-center justify-center gap-2 transition-all"
                 >
                   <span>Begin Step 01: Book Consultation</span>
                   <ChevronRight className="w-4 h-4" />

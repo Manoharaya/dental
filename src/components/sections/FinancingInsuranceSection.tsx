@@ -38,29 +38,29 @@ export const FinancingInsuranceSection: React.FC<FinancingInsuranceSectionProps>
         </div>
 
         {/* Two Pillars Grid: Left = Financing Calculator, Right = Insurance Checker */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
           {/* Pillar 1: Monthly Payment Calculator */}
-          <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-luxury flex flex-col justify-between">
+          <div className="lg:col-span-6 bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-slate-200/90 shadow-luxury flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+              <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-100 mb-4 sm:mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
-                    <Calculator className="w-5 h-5" />
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
+                    <Calculator className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <h3 className="font-display font-bold text-lg text-luxury-slate">
-                    Treatment Financing Estimator
+                  <h3 className="font-display font-bold text-base sm:text-lg text-luxury-slate">
+                    Financing Estimator
                   </h3>
                 </div>
-                <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full font-bold">
+                <span className="text-[10px] sm:text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full font-bold">
                   0% APR Available
                 </span>
               </div>
 
               {/* Treatment Cost Slider */}
-              <div className="mb-6">
+              <div className="mb-5 sm:mb-6">
                 <div className="flex justify-between items-center text-xs mb-2">
-                  <span className="text-slate-500 font-semibold uppercase tracking-wider">Estimated Treatment Cost</span>
-                  <span className="text-lg font-display font-bold text-luxury-slate">${treatmentCost.toLocaleString()}</span>
+                  <span className="text-slate-500 font-semibold uppercase tracking-wider text-[11px] sm:text-xs">Estimated Treatment Cost</span>
+                  <span className="text-base sm:text-lg font-display font-bold text-luxury-slate">${treatmentCost.toLocaleString()}</span>
                 </div>
                 <input
                   type="range"
@@ -69,80 +69,80 @@ export const FinancingInsuranceSection: React.FC<FinancingInsuranceSectionProps>
                   step="250"
                   value={treatmentCost}
                   onChange={(e) => setTreatmentCost(Number(e.target.value))}
-                  className="w-full accent-brand-500 cursor-pointer h-2 bg-slate-200 rounded-lg appearance-none"
+                  className="w-full accent-brand-500 cursor-pointer h-2 bg-slate-200 rounded-lg appearance-none touch-none"
                 />
-                <div className="flex justify-between text-[11px] text-slate-400 mt-1">
-                  <span>$500 (Cleanings/Fillings)</span>
-                  <span>$5,000 (Invisalign)</span>
-                  <span>$15,000+ (Full Arch)</span>
+                <div className="flex justify-between text-[10px] sm:text-[11px] text-slate-400 mt-1">
+                  <span>$500 (Fillings)</span>
+                  <span>$5k (Invisalign)</span>
+                  <span>$15k+ (Full Arch)</span>
                 </div>
               </div>
 
               {/* Term Selection Pills */}
-              <div className="mb-6">
-                <label className="text-xs text-slate-500 font-semibold uppercase tracking-wider block mb-2">
+              <div className="mb-5 sm:mb-6">
+                <label className="text-[11px] sm:text-xs text-slate-500 font-semibold uppercase tracking-wider block mb-2">
                   Repayment Duration
                 </label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                   {[12, 24, 36].map((months) => (
                     <button
                       key={months}
                       onClick={() => setTermMonths(months)}
-                      className={`py-2.5 px-3 rounded-xl text-xs font-semibold transition-all ${
+                      className={`py-2 sm:py-2.5 px-1 sm:px-3 rounded-xl text-[10px] sm:text-xs font-semibold transition-all text-center ${
                         termMonths === months
-                          ? 'bg-luxury-slate text-white shadow-luxury'
+                          ? 'bg-luxury-slate text-white shadow-luxury ring-2 ring-brand-400/30'
                           : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                       }`}
                     >
-                      {months} Months {months <= 24 ? '(0% APR)' : ''}
+                      {months} Mo. {months <= 24 ? '(0% APR)' : ''}
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* Estimated Monthly Payment Display Box */}
-              <div className="p-5 rounded-2xl bg-slate-900 text-white flex items-center justify-between shadow-luxury-dark mb-4">
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 text-white flex items-center justify-between shadow-luxury-dark mb-3 sm:mb-4">
                 <div>
-                  <span className="text-xs text-slate-400 block font-medium">Estimated Monthly Payment</span>
-                  <span className="text-2xl sm:text-3xl font-display font-extrabold text-brand-400">
+                  <span className="text-[11px] sm:text-xs text-slate-400 block font-medium">Estimated Payment</span>
+                  <span className="text-xl sm:text-3xl font-display font-extrabold text-brand-400">
                     ${monthlyPayment}
-                    <span className="text-xs text-slate-400 font-normal"> / month</span>
+                    <span className="text-xs text-slate-400 font-normal"> / mo</span>
                   </span>
                 </div>
-                <div className="text-right text-[11px] text-slate-400">
-                  <span>$0 Down Payment</span>
+                <div className="text-right text-[10px] sm:text-[11px] text-slate-400">
+                  <span className="text-emerald-400 font-semibold">$0 Down Payment</span>
                   <br />
                   <span>No Prepayment Penalty</span>
                 </div>
               </div>
 
-              <p className="text-[11px] text-slate-400 leading-relaxed italic">
+              <p className="text-[10px] sm:text-[11px] text-slate-400 leading-relaxed italic">
                 * Representative estimate via CareCredit & Cherry. Subject to credit approval.
               </p>
             </div>
 
             <button
               onClick={onCheckInsurance}
-              className="mt-6 w-full py-3.5 px-4 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-xs sm:text-sm shadow-glow flex items-center justify-center gap-2 transition-all"
+              className="mt-5 sm:mt-6 w-full py-3 sm:py-3.5 px-4 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-xs sm:text-sm shadow-glow flex items-center justify-center gap-2 transition-all"
             >
               <CreditCard className="w-4 h-4" />
-              Pre-Qualify for Financing (Soft Credit Check)
+              Pre-Qualify for Financing (Soft Check)
             </button>
           </div>
 
           {/* Pillar 2: Insurance Provider Checker */}
-          <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-luxury flex flex-col justify-between">
+          <div className="lg:col-span-6 bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-slate-200/90 shadow-luxury flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+              <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-100 mb-4 sm:mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
-                    <ShieldCheck className="w-5 h-5" />
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
+                    <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <h3 className="font-display font-bold text-lg text-luxury-slate">
-                    Accepted Insurance Providers
+                  <h3 className="font-display font-bold text-base sm:text-lg text-luxury-slate">
+                    Accepted Insurance Plans
                   </h3>
                 </div>
-                <span className="text-xs text-slate-500 font-medium">Direct Electronic Filing</span>
+                <span className="text-[10px] sm:text-xs text-slate-500 font-medium">Electronic Claims</span>
               </div>
 
               {/* Instant Search Bar */}

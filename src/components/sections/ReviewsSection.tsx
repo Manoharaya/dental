@@ -43,58 +43,58 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
           </div>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Testimonials: Swipeable on mobile, 4-col grid on desktop */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto no-scrollbar gap-4 sm:gap-6 pb-2 md:pb-0 snap-x">
           {TESTIMONIALS_DATA.map((rev) => (
             <div
               key={rev.id}
-              className="bg-slate-50 rounded-3xl p-6 border border-slate-200/80 shadow-luxury flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 relative group"
+              className="flex-shrink-0 w-[280px] sm:w-auto snap-center bg-slate-50 rounded-2xl sm:rounded-3xl p-5 sm:p-6 border border-slate-200/80 shadow-luxury flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 relative group"
             >
               <div>
                 {/* Star Rating & Verified Pill */}
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
                   <div className="flex items-center gap-0.5">
                     {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="w-4 h-4 text-amber-500 fill-amber-400" />
+                      <Star key={i} className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 fill-amber-400" />
                     ))}
                   </div>
                   {rev.verified && (
-                    <span className="text-[10px] bg-emerald-50 text-emerald-700 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 border border-emerald-200">
+                    <span className="text-[9px] sm:text-[10px] bg-emerald-50 text-emerald-700 font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 border border-emerald-200">
                       <CheckCircle2 className="w-3 h-3" /> Verified
                     </span>
                   )}
                 </div>
 
                 {/* Quote */}
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-6 italic">
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-4 sm:mb-6 italic">
                   "{rev.quote}"
                 </p>
               </div>
 
               {/* Patient Info & Optional Video Trigger */}
-              <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between">
+              <div className="pt-3 sm:pt-4 border-t border-slate-200/80 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   {rev.patientPhoto ? (
                     <img
                       src={rev.patientPhoto}
                       alt={rev.name}
-                      className="w-9 h-9 rounded-full object-cover border border-slate-200"
+                      className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-slate-200"
                     />
                   ) : (
-                    <div className="w-9 h-9 rounded-full bg-brand-100 text-brand-600 font-bold flex items-center justify-center text-xs">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-100 text-brand-600 font-bold flex items-center justify-center text-xs">
                       {rev.name[0]}
                     </div>
                   )}
                   <div>
                     <strong className="text-xs text-slate-900 block font-semibold">{rev.name}</strong>
-                    <span className="text-[11px] text-brand-600 block">{rev.treatment}</span>
+                    <span className="text-[10px] sm:text-[11px] text-brand-600 block">{rev.treatment}</span>
                   </div>
                 </div>
 
                 {rev.hasVideo && (
                   <button
                     onClick={() => setActiveVideoTestimonial(rev)}
-                    className="w-8 h-8 rounded-full bg-brand-500 hover:bg-brand-600 text-white flex items-center justify-center shadow-glow transition-transform hover:scale-110"
+                    className="w-8 h-8 rounded-full bg-brand-500 hover:bg-brand-600 text-white flex items-center justify-center shadow-glow transition-transform hover:scale-110 shrink-0"
                     title="Watch video testimonial"
                   >
                     <Play className="w-3.5 h-3.5 fill-white ml-0.5" />
@@ -105,10 +105,15 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
           ))}
         </div>
 
-        {/* Video Testimonial Modal Simulation */}
+        {/* Mobile Swipe Guidance Note */}
+        <div className="md:hidden flex items-center justify-center text-[11px] text-slate-400 mt-3">
+          <span>Swipe horizontally to explore more patient stories →</span>
+        </div>
+
+        {/* Video Testimonial Modal (Bottom sheet on mobile, dialog on desktop) */}
         {activeVideoTestimonial && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in">
-            <div className="bg-slate-900 text-white rounded-3xl max-w-lg w-full p-6 relative border border-slate-800 shadow-2xl">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/70 backdrop-blur-md animate-in fade-in">
+            <div className="bg-slate-900 text-white rounded-t-3xl sm:rounded-3xl max-w-lg w-full max-h-[92vh] overflow-y-auto p-5 sm:p-6 relative border border-slate-800 shadow-2xl">
               <button
                 onClick={() => setActiveVideoTestimonial(null)}
                 className="absolute top-4 right-4 p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white"

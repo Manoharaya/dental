@@ -261,7 +261,7 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
 
     renderer.domElement.addEventListener('click', handleClick);
 
-    // Orbit Drag Controls
+    // Orbit Drag Controls (Mouse & Touch)
     let isDragging = false;
     let prevX = 0;
     let prevY = 0;
@@ -288,9 +288,34 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
       isDragging = false;
     };
 
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        prevX = e.touches[0].clientX;
+        prevY = e.touches[0].clientY;
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDragging || e.touches.length !== 1) return;
+      const dx = e.touches[0].clientX - prevX;
+      const dy = e.touches[0].clientY - prevY;
+      targetRotY += dx * 0.008;
+      targetRotX = Math.max(0.05, Math.min(1.2, targetRotX + dy * 0.006));
+      prevX = e.touches[0].clientX;
+      prevY = e.touches[0].clientY;
+    };
+
+    const onTouchEnd = () => {
+      isDragging = false;
+    };
+
     renderer.domElement.addEventListener('mousedown', onMouseDown);
+    renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
     window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('touchend', onTouchEnd);
 
     // Render loop
     let animId: number;
@@ -326,8 +351,11 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
       ro.disconnect();
       renderer.domElement.removeEventListener('click', handleClick);
       renderer.domElement.removeEventListener('mousedown', onMouseDown);
+      renderer.domElement.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('touchend', onTouchEnd);
       if (renderer.domElement.parentNode) {
         renderer.domElement.parentNode.removeChild(renderer.domElement);
       }
@@ -378,33 +406,33 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
   }, [activeLayer, selectedToothKey]);
 
   return (
-    <div className="w-full bg-slate-900 rounded-3xl border border-slate-800 shadow-luxury-dark overflow-hidden p-6 md:p-8 text-white relative">
+    <div className="w-full bg-slate-900 rounded-2xl sm:rounded-3xl border border-slate-800 shadow-luxury-dark overflow-hidden p-4 sm:p-6 md:p-8 text-white relative">
       {/* Background ambient lighting */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-10 w-80 h-80 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header with Title and Medical Tag */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5 sm:pb-6 mb-6">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-400/20 text-brand-400 text-xs font-semibold uppercase tracking-wider mb-2">
             <Sparkles className="w-3.5 h-3.5" />
             Signature Interactive Feature
           </div>
-          <h3 className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-display font-bold text-white tracking-tight">
             Explore Your Dental Health in 3D
           </h3>
-          <p className="text-slate-400 text-sm mt-1">
-            Rotate the full dental arch, click on individual teeth, and inspect anatomical layers and clinical treatments.
+          <p className="text-slate-400 text-xs sm:text-sm mt-1">
+            Rotate the full dental arch, tap individual teeth, and inspect anatomical layers and clinical treatments.
           </p>
         </div>
 
         {/* Quick Tooth Selector Pills */}
-        <div className="flex flex-wrap items-center gap-1.5 bg-slate-800/80 p-1.5 rounded-2xl border border-slate-700">
+        <div className="flex items-center gap-1.5 bg-slate-800/80 p-1 sm:p-1.5 rounded-xl sm:rounded-2xl border border-slate-700 overflow-x-auto no-scrollbar">
           {(['molar', 'premolar', 'canine', 'incisor'] as const).map((key) => (
             <button
               key={key}
               onClick={() => setSelectedToothKey(key)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium capitalize transition-all ${
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-medium capitalize shrink-0 transition-all ${
                 selectedToothKey === key
                   ? 'bg-brand-500 text-white shadow-glow'
                   : 'text-slate-400 hover:text-white hover:bg-slate-700/60'
@@ -417,20 +445,20 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
       </div>
 
       {/* Two Column Layout: 3D Arch Canvas + Diagnostic Intelligence Card */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
         {/* Left: 3D Canvas Area */}
-        <div className="lg:col-span-7 flex flex-col justify-between bg-slate-950/60 rounded-2xl border border-slate-800/80 p-4 relative min-h-[420px]">
+        <div className="lg:col-span-7 flex flex-col justify-between bg-slate-950/60 rounded-2xl border border-slate-800/80 p-3 sm:p-4 relative min-h-[360px] sm:min-h-[420px]">
           {/* Top Canvas Badges: Layer Selectors */}
           <div className="flex flex-wrap items-center justify-between gap-2 z-10 mb-2">
-            <div className="flex items-center gap-1 bg-slate-900/90 backdrop-blur-md p-1 rounded-xl border border-slate-700/80 text-xs">
-              <span className="text-slate-400 px-2 py-0.5 flex items-center gap-1 font-medium">
+            <div className="flex items-center gap-1 bg-slate-900/90 backdrop-blur-md p-1 rounded-xl border border-slate-700/80 text-[11px] sm:text-xs">
+              <span className="text-slate-400 px-1.5 sm:px-2 py-0.5 flex items-center gap-1 font-medium">
                 <Layers className="w-3.5 h-3.5 text-brand-400" /> Layers:
               </span>
               {(['all', 'enamel', 'dentin', 'pulp'] as const).map((layer) => (
                 <button
                   key={layer}
                   onClick={() => setActiveLayer(layer)}
-                  className={`px-2.5 py-1 rounded-lg text-xs capitalize transition-colors ${
+                  className={`px-2 sm:px-2.5 py-1 rounded-lg text-[10px] sm:text-xs capitalize transition-colors ${
                     activeLayer === layer
                       ? 'bg-brand-500 text-white font-semibold'
                       : 'text-slate-400 hover:text-slate-200'
@@ -441,13 +469,13 @@ export const DentalExplorer3D: React.FC<DentalExplorer3DProps> = ({
               ))}
             </div>
 
-            <span className="text-xs text-slate-400 bg-slate-900/80 px-2.5 py-1 rounded-lg border border-slate-800 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-brand-400 animate-pulse" /> Click any tooth to inspect
+            <span className="text-[10px] sm:text-xs text-slate-400 bg-slate-900/80 px-2 sm:px-2.5 py-1 rounded-lg border border-slate-800 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-brand-400 animate-pulse" /> Tap any tooth to inspect
             </span>
           </div>
 
           {/* 3D WebGL Canvas Mounting Point */}
-          <div ref={mountRef} className="w-full h-80 sm:h-96 relative cursor-grab active:cursor-grabbing" />
+          <div ref={mountRef} className="w-full h-64 sm:h-80 md:h-96 relative cursor-grab active:cursor-grabbing touch-none" />
 
           {/* Bottom Interactive Hint & Selected Tooth pill */}
           <div className="flex items-center justify-between z-10 pt-2 border-t border-slate-800/80 text-xs text-slate-400">

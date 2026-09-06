@@ -75,8 +75,8 @@ export const SmileSimulatorSection: React.FC<SmileSimulatorSectionProps> = ({ on
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Column: Interactive Visual Canvas */}
           <div className="lg:col-span-7">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-950">
-              <div className="relative h-80 sm:h-[440px] w-full overflow-hidden">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-950">
+              <div className="relative h-64 sm:h-[400px] md:h-[440px] w-full overflow-hidden">
                 <img
                   src={showOriginal ? currentPreset.imageBefore : currentPreset.imageAfter}
                   alt={currentPreset.title}
@@ -89,37 +89,37 @@ export const SmileSimulatorSection: React.FC<SmileSimulatorSectionProps> = ({ on
                 />
 
                 {/* Simulation Mode Badge */}
-                <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
-                  <span className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border ${
+                <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
+                  <span className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-semibold backdrop-blur-md border ${
                     showOriginal
                       ? 'bg-amber-500/80 text-white border-amber-400/40'
                       : 'bg-brand-500/80 text-white border-brand-400/40 shadow-glow'
                   }`}>
-                    {showOriginal ? 'Base Natural Smile' : 'Simulated Target Aesthetic'}
+                    {showOriginal ? 'Base Smile' : 'Simulated Target'}
                   </span>
                 </div>
 
                 {/* Hold to compare button */}
-                <div className="absolute bottom-4 right-4 z-10">
+                <div className="absolute bottom-3 right-3 z-10">
                   <button
                     onMouseDown={() => setShowOriginal(true)}
                     onMouseUp={() => setShowOriginal(false)}
                     onTouchStart={() => setShowOriginal(true)}
                     onTouchEnd={() => setShowOriginal(false)}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/80 hover:bg-slate-900 backdrop-blur-md text-xs text-white border border-slate-700 shadow-lg active:scale-95 transition-all"
+                    className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-slate-900/85 hover:bg-slate-900 backdrop-blur-md text-[10px] sm:text-xs text-white border border-slate-700 shadow-lg active:scale-95 transition-all select-none touch-none"
                   >
                     <Eye className="w-3.5 h-3.5 text-brand-400" />
-                    Press & Hold to Compare Original
+                    Hold to Compare
                   </button>
                 </div>
               </div>
 
               {/* Simulation Note & Medical Disclaimer Bar */}
-              <div className="p-4 bg-slate-950/90 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              <div className="p-3.5 sm:p-4 bg-slate-950/90 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 text-[11px] sm:text-xs">
                 <p className="text-slate-400">
                   <strong className="text-slate-200">{currentPreset.title}:</strong> {currentPreset.note}
                 </p>
-                <span className="text-[11px] text-slate-500 shrink-0 italic">
+                <span className="text-[10px] sm:text-[11px] text-slate-500 shrink-0 italic">
                   * Illustrative simulation only. Actual clinical outcomes vary.
                 </span>
               </div>
@@ -127,7 +127,7 @@ export const SmileSimulatorSection: React.FC<SmileSimulatorSectionProps> = ({ on
           </div>
 
           {/* Right Column: Customization Controls Panel */}
-          <div className="lg:col-span-5 bg-slate-800/60 backdrop-blur-md rounded-3xl border border-slate-700/80 p-6 sm:p-8 shadow-luxury-dark">
+          <div className="lg:col-span-5 bg-slate-800/60 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-slate-700/80 p-4 sm:p-6 lg:p-8 shadow-luxury-dark">
             <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-700">
               <div className="flex items-center gap-2">
                 <Sliders className="w-5 h-5 text-brand-400" />
@@ -210,7 +210,7 @@ export const SmileSimulatorSection: React.FC<SmileSimulatorSectionProps> = ({ on
                 max="100"
                 value={alignmentIntensity}
                 onChange={(e) => setAlignmentIntensity(Number(e.target.value))}
-                className="w-full accent-brand-500 cursor-pointer h-2 bg-slate-700 rounded-lg appearance-none"
+                className="w-full accent-brand-500 cursor-pointer h-2 bg-slate-700 rounded-lg appearance-none touch-none"
               />
             </div>
 

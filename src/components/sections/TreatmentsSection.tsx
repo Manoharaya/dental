@@ -50,7 +50,7 @@ export const TreatmentsSection: React.FC<TreatmentsSectionProps> = ({
         </div>
 
         {/* Category Pill Navigation */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+        <div className="flex items-center gap-2 mb-8 overflow-x-auto no-scrollbar pb-2 px-1 sm:justify-center sm:flex-wrap">
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -59,7 +59,7 @@ export const TreatmentsSection: React.FC<TreatmentsSectionProps> = ({
                 const matching = cat.id === 'all' ? TREATMENTS_DATA[0] : TREATMENTS_DATA.find((t) => t.category === cat.id);
                 if (matching) setSelectedId(matching.id);
               }}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+              className={`whitespace-nowrap shrink-0 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                 activeCategory === cat.id
                   ? 'bg-luxury-slate text-white shadow-luxury'
                   : 'bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300'
@@ -71,9 +71,9 @@ export const TreatmentsSection: React.FC<TreatmentsSectionProps> = ({
         </div>
 
         {/* Interactive Treatment Explorer: Treatment Selector Strip + Detailed Showcase */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           {/* Left Column: Quick Treatment List Cards */}
-          <div className="lg:col-span-4 space-y-2.5 max-h-[640px] overflow-y-auto pr-1">
+          <div className="lg:col-span-4 space-y-2.5 max-h-[300px] lg:max-h-[640px] overflow-y-auto pr-1">
             {filteredTreatments.map((t) => (
               <div
                 key={t.id}
